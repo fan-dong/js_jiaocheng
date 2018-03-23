@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点查找-动力学院</title>
+<style type="text/css"></style>
+</head>
+
+<body>
+<pre>
+<!---父子关系查找--->
+<ul id="oUl">
+<li><a href="#">动力学院</a></li>
+<li id="oLi"><a href="#">动力课堂</a></li>
+<li><a href="#">PHP学院</a>欢迎你</li>
+</ul>
+<!---兄弟关系查找--->
+<div class="oDiv">
+<h1>兄弟一</h1>
+<h2 id="oH2">兄弟二</h2>
+<b>兄弟三</b>
+</div>
+<script type="text/javascript">
+/*
+知识点一：父子关系查找
+	1、hasChildNodes()方法，判断一个对象是否包含子节点。
+		语法格式：element.hasChildNodes()
+		返回值：如果对象包含子节点则返回true,如果对象不包含子节点返回false.
+
+	2、childNodes 对象，返回一个元素子节点的集合。
+	
+	3、parentNode属性返回指定节点的父节点。
+		语法格式：element.parentNode
+
+	4、firstChild 指向childNodes中的第一个节点	
+		语法格式：element.firstChild
+				
+	5、lastChild 指向childNodes列表中的最后一个节点		
+		语法格式：element.lastChild
+单词必背：
+	parent：父亲
+	child：孩子
+	node：节点	
+	first：第一
+	last：最后一个 		
+*/ 
+
+var oUl = document.getElementById("oUl");
+if(oUl.hasChildNodes()){
+	oUlChild = oUl.childNodes;
+	for(var i=0;i<oUlChild.length;i++){
+		echo(oUlChild[i].nodeName);
+	}
+}
+/*
+输出：
+#text
+LI
+#text
+LI
+#text
+LI
+#text
+//改写代码如下：
+*/
+
+echo("----------------只获取元素节点-------------");
+var oUl = document.getElementById("oUl");
+if(oUl.hasChildNodes()){
+	oUlChild = oUl.childNodes;
+	for(var i=0;i<oUlChild.length;i++){
+		if(oUlChild[i].nodeType==3) continue;
+		echo(oUlChild[i].nodeName);
+	}
+}
+
+/*
+进一步修改上面代码
+*/
+
+echo("----------------批量修改元素节点的样式-------------");
+var oUl = document.getElementById("oUl");
+if(oUl.hasChildNodes()){
+	oUlChild = oUl.childNodes;
+	for(var i=0;i<oUlChild.length;i++){
+		if(oUlChild[i].nodeType==3) continue;
+		oUlChild[i].style.border = "#ff0000 solid 5px";
+	}
+}
+
+
+
+echo("----------------parentNode获取父节点-------------");
+var oLi = document.getElementById("oLi");
+echo(oLi.parentNode.tagName);	//输出：UL
+echo(oLi.parentNode.hasChildNodes());	//输出：true
+echo(oLi.parentNode.childNodes.length);		//输出：7
+/*
+提示：parentNode属性可以反复使用，我们可以通过一个元素，找到其父亲，其爷爷(如果有的话)
+	element.parentNode.parentNode 等等
+*/
+
+
+/*
+知识点二：兄弟关系查找	
+	1、nextSibling
+	2、previousSibling
+		
+*/
+echo("--------兄弟关系查找--------------");
+var oH2 = document.getElementById("oH2");
+var next  = oH2.nextSibling.nodeType==1?oH2.nextSibling:null;
+echo(next)  ;	//输出null,
+
+/*
+	说明：在IE老版浏览器输出下一个元素，因为对空白文本节点解释不同，现在浏览器认为空白属于文本节点。
+	为了解决这个问题。一般我们把nexSibling与previousSibling重新封装
+*/
+//封装后的nextSib
+function nextSib(node){
+	var t = node.parentNode.lastChild;
+	if(node == t){return null;} //如果是最后一个直接结束函数
+	var t2 = node.nextSibling;	//获取下一个兄弟
+	//如果下一个兄弟不是元素型的，并且下下一个还有元素
+	while(t2.nodeType != 1&&t2.nextSibling != null){
+		t2 = t2.nextSibling;
+		return (t2.nodeType==1?t2 : null);
+	}
+}
+
+var next = nextSib(oH2);
+echo(next);		//[object HTMLPhraseElement]
+
+//封装后的prevSib,请同学们自己完成，就是跳过文本节点，只返回元素的上一个兄弟元素节点。
+function prevSib(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+
+</script>
+</pre>
+</body>
+</html>

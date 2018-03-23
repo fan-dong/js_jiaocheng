@@ -1,0 +1,63 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：原型链实现继承的问题 
+请看下面的例子：
+*/
+function  A(){
+	this.name = "A类";
+	this.like = ["打球","游泳"];
+}
+A.prototype.say = function(){
+	echo("A类的原型方法");
+}
+
+function B(){
+	this.age = 18;
+}
+
+B.prototype = new A();
+var b1 = new B;
+var b2 = new B;
+b1.like.push("爬山");
+echo(b2.like);		//输出：打球,游泳,爬山  ，b1喜欢爬，b2并不喜欢爬山。这就是问题所在
+
+
+/*
+原型链实现继承的两大问题：
+	问题一：关于引用类型属性的问题
+	问题二：在创建子类的实例时，没有办法在不影响所有对象实例的情况下向父类的构造函数传递参数。
+以上两个问题导致，我们不会考虑在项目实战中单独使用原形链来完成继承。
+为了解决问题一引入了：借用构造函数的思想	
+下一节：借用构造函数实现继承
+*/
+
+
+
+
+
+
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

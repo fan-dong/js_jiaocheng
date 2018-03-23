@@ -1,0 +1,79 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：流程控制语句       *
+ ****************************
+ */
+/*
+语法格式：
+	while(expression){
+		statement;
+	}
+
+说明：首先判断expression条件是否为真，为真时候循环不停的执行，直到为假结束循环，如果第一次判断就为假那么while循环体内容不会被执行。
+注意：一定要保证expression有不成立的时候否则程序无限制的运行，就是所谓的死循环。
+案例解释：	
+*/
+//求1到100的和
+var i=1,sum=0;
+while(i<=100){
+	sum += i;
+	i++;	//如果没有这一句就变成了死循环，因为i=1永远小于100	
+}
+echo(sum); //输出5050
+echo(i);	//输出101
+/*
+代码解释：让i与100进行比较，如果小于等于100就执行while循环体中的两句代码
+让 i每次变化大一个，并把所以的和累计在sum中。当i超过100的时候while中的条件就不在满足
+while循环就自动结束。
+*/
+
+
+echo('--------do-while循环--------');
+/*
+语法格式：
+	do{
+		satement;
+	}while(expression)
+说明：先循环一下然后再对比条件可满足，如果不满足就不在循环，如果满足继续循环。	
+案例解释：
+*/
+var sum=0,i=1;
+do{
+ 	sum += i;
+	i++;	//如果没有这一句就变成了死循环，因为i=1永远小于100	
+}while(i<=100);
+
+echo(sum);
+echo(i);
+
+
+//对比while与do...while的区别
+var b =false; //千万不要改成真，否则变成死循环
+while(b){
+	echo('因为b为假所以这句执行不到');
+}
+
+do{
+	echo('虽然b为假，我也要执行一次');
+}while(b)
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

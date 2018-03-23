@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>frame动力学院</title>
+</head>
+
+<body>
+<!--
+知识点：JS获取子框架内容的方法
+-->
+<div id="mainbox">我是main</div>
+<iframe name="myframe" id="subframe" src="sub.html"></iframe>
+<script type="text/javascript">
+//IE专用语法一：document.frames["index按索引顺序"].document
+//IE专用语法二：document.frames["frame的name属性"].document
+//代码示例如下：
+/* 
+window.onload = function(){
+	// alert(document.frames[0].document.getElementById("subbox").innerHTML);
+	//  alert(document.frames["myframe"].document.getElementById("subbox").innerHTML);
+}
+*/ 
+</script>
+
+<script type="text/javascript">
+/*
+//通用方法：以下代码适用于 IE和火狐。谷歌需要放到网站环境下否则测试无效。
+window.onload = function(){
+	var subbox =  document.getElementById('subframe').contentWindow.document.getElementById('subbox')
+	alert(subbox.innerHTML);
+}
+*/
+</script>
+
+<script type="text/javascript"> 
+//封装好的获取子框架所有内容的示例
+function getIframeContent(frameId){  //获取iframe中文档内容
+	//var doc = document.getElementById(frameId).contentDocument; 
+	//在谷歌与火狐下：.contentDocument 相当于 .contentWindow.document 
+	//IE下不行,下面一个在IE7+,谷歌，火狐测试都能兼容 
+	var doc = document.getElementById(frameId).contentWindow.document;
+ 	return doc.body.innerHTML;
+} 
+window.onload = function(){
+	var  htmlTxt =  getIframeContent("subframe");
+	alert(htmlTxt);
+}
+</script>
+
+
+</body>
+</html>

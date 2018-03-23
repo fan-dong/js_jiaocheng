@@ -1,0 +1,41 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：灵活多变的this与全局函数实例：setTimeout配合
+*/
+//思考题目：以下代码运行输出什么？为什么？ 
+ 
+var a = "全局的a";
+function obj() { 
+	this.fn = function() { 
+		alert(this.a); 
+		setTimeout(this.fn, 1000);	 
+	} 
+} 
+var o = new obj(); 
+o.a = "局部的a"
+o.fn(); 
+ 
+/*思考题目二：以下代码运行又输出什么？为什么？
+var a = "全局的a";
+function obj() { 
+	this.fn = function() { 
+		alert(this.a); 
+		that = this;
+		setTimeout(fnThat, 1000);	 
+	} 
+} 
+function fnThat(){that.fn();}
+var o = new obj(); 
+o.a = "局部的a"
+o.fn(); 
+*/
+</script>
+</pre>

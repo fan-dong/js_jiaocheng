@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点的创建于添加 - 动力学院</title>
+<style type="text/css">
+#box{ border:5px #0C3 solid;}
+</style>
+</head>
+
+<body>
+<pre>
+ 
+<div id="box"><h1>默认内容</h1></div>
+ 
+<script type="text/javascript">
+/*
+知识点一：innerHTML属性
+	innerHTML虽然不是标准的DOM方法，却胜似标准的DOM方法，基本所有主流浏览器都支持
+	因为使用简单方便。 下面看下如何使用
+*/ 
+
+var box = document.getElementById("box");
+box.innerHTML = "<h1>这样我就被添加进了DIV中</h1>";
+box.innerHTML = "<b>这样我就被添加进了DIV中,但是也清空了上面添加的内容</b>"; 
+box.innerHTML = "我的用法就是这样，简单吧";
+box.innerHTML = "我的缺点就是简单方便，没有多余的功能，这也是我的优点，我可以高性能的表现";
+</script>
+</pre>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>setTimeout与setInterval的区别</title>
+<style type="text/css">
+#move {
+	width:100px;
+	height:50px;
+	border:20px solid #F63;
+}
+</style>
+</head>
+
+<body>
+<div id="move"></div>
+<script language="javascript">
+
+function delay() {
+//此处添加时间是为了测试这个函数会延时多久
+  var start = Date.now(),    end;
+  for (var i = 0; i < 10000; i++) {
+    for (var j = 0; j < 30000; j++);
+  }
+  
+  end = Date.now();
+  var m = new Date();
+ 	move.innerHTML = (end - start) +":"+ m.getSeconds() ;
+	 setTimeout(delay,1000);
+}
+delay();
+//setInterval(delay,1000);
+
+
+/*
+setTimeout是超时调用，第一个程序执行完毕之后超过指定时间开始调用。
+setInterval是间隔调用，每隔固定时间就进行调用,如果程序执行时间比间歇时间长
+会导致超过间歇时间还没调用的程序被跳过。
+*/
+</script>
+</body>
+</html>

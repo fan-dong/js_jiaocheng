@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>myGetElementsByClassName-动力学院</title>
+</head>
+
+<body>
+<h1 class="clsA" id="h1">动</h1>
+<h2 class="clsA">力</h2>
+<h3 class="clsA">学</h3>
+<h4 class="clsA">院</h4>
+<h5 class="clsA clsB">PHP</h5>
+<div class="clsA" id="box">
+<h6 class="clsA">PHP</h6>
+</div>
+<script type="text/javascript">
+Object.prototype.get = Object.prototype.getElementsByClassName  = function(cls){
+	//判断对象是不是元素，如果是继续否则返回null,1是普通html元素，9代表document
+	if(!cls) return null;	//如果没有传递任何参数直接返回
+	if(this.nodeType==1 || this.nodeType==9){
+		var nList = [];	//定义一个数组用来保存获取的元素
+		var box = this.nodeType==1?this:document.documentElement;	//获取父级对象
+		getNodes(box,cls);	//调用处理函数	
+		return nList;		//返回获取的数组 
+	}
+	else{ return null; }
+
+	//获取包含指定类的下一级节点
+	//声明一个数组，注意数组要在函数外
+	
+	//获取包含指定类的下一级节点 
+	function getNodes(obj,cls){
+		var l = obj.childNodes.length;	//获取对象子结点长度
+		for(var i=0;i<l;i++){
+			if(obj.childNodes[i].nodeType==1){
+				var clsName = obj.childNodes[i].className;	
+				var p = eval("/"+cls+"/");			//构建的字符串解析为正则对象	
+				if(p.test(clsName)){					
+					nList.push(obj.childNodes[i]); 
+					//判断元素是否有子元素，如果有继续递归
+					if(obj.childNodes[i].hasChildNodes()){
+						getNodes(obj.childNodes[i],cls);
+					}
+				}	
+			}	
+		}
+	}
+	//getNodes_End	
+} 
+
+var box = document.getElementById("box"); 
+var arr = box.parentNode.get("clsA");
+//document.writeln(arr.length);
+for(var p in arr){
+	arr[p].style.border="#ff0000 solid 2px";
+} 
+</script>
+</body>
+</html>

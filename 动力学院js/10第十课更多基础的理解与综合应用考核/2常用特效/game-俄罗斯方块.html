@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>学院作业-动力学院</title>
+<script type="text/javascript">
+
+// temptop         存储图形离顶端的距离
+// templeft        存储图形离左边的距离
+// tempwidth       存储图形的宽度
+// tempheight      存储图形的高度
+// tempEnterCount  存储按回车键的次数 按的次数逢 5 即为1
+// blankPos1       存储图形中第一个空白的位置
+// blankPos2       存储图形中第二个空白的位置
+// maxTop          存储图形中离最顶端的最大距离
+// minTop          存储图形中离最顶端的最小距离
+
+var temptop=0,templeft=350,tempwidth=150,tempheight=50,tempEnterCount=0,blankPos1=0,blankPos2=0,maxTop=500,minTop=30;
+
+ function changeXY(oEvent){
+	 
+	 if(window.event){
+		 
+		 oEvent=window.event;
+		 
+		 }
+	
+
+	var oDiv=document.getElementById("oDiv");
+	
+	if(oEvent.keyCode==37){   //按了左键
+		
+		templeft-=30;
+		
+		}
+		
+	if(oEvent.keyCode==39){   //按了右键
+		
+		templeft+=30;
+		
+		}
+		
+	if(oEvent.keyCode==38){   //按了上键
+		
+		if(temptop>minTop){
+		
+			temptop-=30;
+		
+			}
+		
+		}
+		
+	if(oEvent.keyCode==40){   //按了下键
+		
+		if (temptop<maxTop){
+		
+			temptop+=30;
+			
+			}
+		
+		}
+	
+	
+	if(oEvent.keyCode==13){   //按了回车键
+		
+		if(!(temptop<maxTop)) return;
+		
+			if(tempEnterCount!=4)
+			{
+				tempEnterCount+=1;
+				
+				}else{
+					
+			tempEnterCount=1;
+			
+			}
+				
+			
+			getBlankPost(1);//根据块的形状 得到图形中白色块的位置
+			
+			
+		     //alert(blankPos1+" "+blankPos2);
+			 var tempObj=document.getElementById("oDiv").getElementsByTagName("li");
+			 
+			 
+			 //根据得到的白块位置来改变li的className 从而实现白块
+			 
+			 
+			 for(var i=0;i<6;i++){
+				 
+				 if(i==blankPos1-1||i==blankPos2-1){
+				 
+				 tempObj.item(i).className="blank";
+				 
+				 }else{
+					 
+					 tempObj.item(i).className="";
+					 
+					 }
+				
+				}
+		
+			if (temptop<maxTop){
+		
+				if(tempwidth==150){
+					
+				tempwidth=100;
+				tempheight=150;
+				templeft+=50;
+				temptop-=50;	
+	
+				}else{
+					
+					tempwidth=150;
+					tempheight=100;	
+					templeft-=50;
+					temptop+=50;
+					
+				}
+			
+			}
+			
+			oDiv.style.width=tempwidth+"px";
+			oDiv.style.height=tempheight+"px";
+
+		}
+		
+		oDiv.style.top=temptop+"px";
+		oDiv.style.left=templeft+"px";
+	 
+	 }
+		
+	function changePostion(){
+		
+		obj=document.getElementById("oDiv");
+		
+		if (temptop<maxTop){
+			
+			temptop+=30;
+		
+		}
+		
+		obj.style.top=temptop+"px";
+		
+		}
+		
+	//根据图形类型来得到白块的位置
+		
+	function getBlankPost(tuType){
+		
+		if(tuType==1){
+			
+//		  ======
+//		  ======		
+//		  ======		
+//	===== ====== =====
+//	===== ====== =====
+//	===== ====== =====
+			
+//	1   2   3   4   5   6
+//	
+//	2   4   6   1   3   5
+//	
+//	6   5   4   3   2   1
+//	
+//	5   3   1   6   4   2
+//	
+//	1   2   3   4   5   6
+//	
+//	
+//	1  3  白色
+			
+		
+		switch(tempEnterCount){
+				
+				case 1:
+				    blankPos1=2;
+					blankPos2=6;
+					break;
+				case 2:
+				    blankPos1=6;
+					blankPos2=4;
+					break;
+				case 3:
+				    blankPos1=5;
+					blankPos2=1;
+					break;
+				case 4:
+				    blankPos1=1;
+					blankPos2=3;
+					break;
+				default:
+				
+				}	
+		
+		     }
+			 
+		}
+	
+	window.onload=function(){
+		
+		window.setInterval("changePostion()",700);
+		
+		window.document.onkeydown=changeXY;
+	}
+</script>
+<style type="text/css">
+body,ul,li{ margin:0; padding:0; list-style:none;}
+#oDiv { width:150px; height:100px; position:absolute; left:350px; top:0; }
+#oDiv li{ border:#FFF solid 1px; width:48px; height:48px; background:#069; float:left;}
+#oDiv li.blank{ background:#FFF; border-color:#FFF;}
+</style>
+</head>
+<body>
+<div id="oDiv">
+  <ul>
+    <li class="blank"></li>
+    <li></li>
+    <li class="blank"></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+</body>
+</html>

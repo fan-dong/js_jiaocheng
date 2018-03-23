@@ -1,0 +1,45 @@
+<h1 id="h1">1</h1>
+<h1 id="h2">2 </h1>
+<h1 id="h3">3 </h1>
+<h1 id="h4">  </h1>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象           *
+ ****************************
+ */
+/*
+	setInterval间隔一定时间执行一段代码，但是必须等其他非时间代码执行完毕，才开始执行。
+	如果其他代码执行时间较长，超过间隔时间的会忽略执行。
+	案例如下：	
+*/
+
+var time1 = (new Date()).getTime();	//时间点一
+h1.innerHTML = time1 ;  
+var timer  = setInterval(F,50); 		//50毫秒执行一次的定时器
+
+sleep(240) ;							//程序2(图片中蓝色部分) 运行了240毫秒，导致50毫秒应该执行一次的前4次没能执行
+
+function F(){
+	var time2 = (new Date()).getTime();	//时间点二
+	var time3 = time2 - time1 ; 			//时间差
+	h2.innerHTML = time2;
+	h3.innerHTML = time3;
+	h4.innerHTML += "1";  					//统计执行次数
+	if(time3>240) clearInterval(timer);		//超过240毫秒的其实就是250毫秒(不考虑其他误差情况下)停止执行	
+}
+
+
+//暂停多长时间,以毫秒为单位
+function sleep(_millisecond){
+	var _t1 = (new Date()).getTime() + _millisecond
+	while(true){
+		var _t2 = (new Date()).getTime();
+		if(_t2 >_t1) return true;
+	}
+}
+ 
+</script>
+</pre>

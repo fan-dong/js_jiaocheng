@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>页面加载事件-动力学院</title>
+</head>
+
+<body>
+<script type="text/javascript">
+/*
+//window上的onload事件应用示例
+window.onload = function(){
+	var my = document.getElementById("mydiv");
+	document.writeln(my.innerHTML+"<h1>也是大家的</h1>");
+	//说明window.onload 与写到 body中的onload是等价的
+}
+*/
+
+
+</script>
+<div id="mydiv">中国的世界的</div>
+<img src="http://www.seodongli.com/images/dong.png" id="myimg"> 
+<script type="text/javascript">
+var img = document.getElementById("myimg");
+/*
+//img的onload事件示例
+img.onload = function(){
+	alert("图像加载完毕,如果加载错误这个事件不会触发，而是触发onerror事件");
+}
+
+//以上js写法与下面的html中写法等价
+<img src="http://www.seodongli.com/images/dong.png" onload="alert('图像加载完毕')">
+*/
+/*
+代码示例二：onerror的用法，当图片加载错误或没有图片的时候，替换默认图片
+img.onerror = function(){
+	this.src = "http://www.seodongli.com/images/dong.png"; 
+}
+*/
+
+/*
+//定时器函数和计数器i是为了解决IE7下重复触发onresize问题
+var i =0;
+window.onresize = function(ev){	
+	if(i==0){alert(document.body.clientWidth);}
+	i++;	
+	function A(){ i=0;}
+	setTimeout(A,1);
+}
+*/
+
+window.onunload = function(){
+	alert("我被关闭了，通过IE调试切换不同浏览器版本能看到这个提示");
+}
+
+window.onscroll = function(){
+	alert("我的滚动条发生移动了"+document.documentElement.scrollTop);
+}
+</script> 
+<!--
+知识点一：onload事件
+	说明：
+	当页面完全加载后在window上触发；   
+    当图像加载完毕在<img>元素上触发；
+    当嵌入的内容加载完毕在<object>元素上触发；
+    当所有框架加载完毕后在框架集上触发； 
+    
+
+知识点二：onerror事件
+	说明：
+	当发生错误时在window上面触发；
+	当图像无法加载时在<img>元素上触发；
+    当无法加载嵌入的内容时在<object>元素上触发；
+    当有一个或多个框架无法加载时在框架集上触发。    
+
+
+知识点三：onresize事件
+	说明：在浏览器窗口尺寸被改变时触发,但是不同浏览器机制不同，在IE7下会导致触发多次。
+    可以通过定时器计数器解决这个问题。
+
+
+知识点四：onunload事件
+	说明：当页面完全卸载后在window上面触发（IE11自带切换版本可测试）。
+    因垃圾广告原因这个事件很多浏览器限制没有使用意义，请勿使用。
+
+知识点五：onscroll事件
+	说明：当元素的滚动条发生变化时除非，scroll事件触发后改变的表现是内部元素的变化。
+    例如：scroll事件是发生在window窗口上的，但是实际表示是body中内容的变化。
+	页面内容要足够多才能出现滚动条。    
+-->
+<div style="height:600px; overflow:scroll;">
+<div style="height:1000px; width:200px;"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>浏览器窗口位置判断-动力学院</title>
+<style type="text/css">
+div {
+	width:600px;
+	height:300px;
+	border:10px #0C3 solid;
+}
+h2 {
+	border:2px #06C solid;
+	position:fixed;
+	top:150px;
+	left:20px;
+	width:300px;
+	height:150px;
+	font-size:14px;
+}
+#box3 {
+	border-color:#00F;
+}
+#box4 {
+	height:700px;
+}
+</style>
+</head>
+
+<body>
+<h2 id="h2">判断333：在或不在</h2>
+<div>111 </div>
+<div>222 </div>
+<div id="box3"> 333 </div>
+<div id="box4"> 444 </div>
+<script type="text/javascript">
+var box3 = document.getElementById("box3");
+var h2 = document.getElementById("h2"); 
+window.onscroll = function(){
+	var scrollTop = document.documentElement.scrollTop ||  document.body.scrollTop
+	h2.innerHTML  = "scrollTop高度: "+ scrollTop + " <br>浏览器当前窗口高度: " + document.documentElement.clientHeight + "<br> 总高度："+ document.body.offsetHeight +"<br> 蓝色顶部在整个网页中的位置："+box3.offsetTop +"<br> 蓝色底部在整个网页中的位置："+(box3.offsetTop+box3.offsetHeight);
+
+}
+</script>
+</body>
+</html>

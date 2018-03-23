@@ -1,0 +1,89 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：call()用法
+语法：objCurrent.call([thisObj[,arg1[, arg2[,   [,.argN]]]]]) 
+定义：调用一个对象，并以另一个对象替换当前对象。 
+参数说明：objCurrent必须是一个对象，call后面小括号中的参数可以没有，如果给出
+第一个必须是一个对象，其他是普通参数。
+代码解释：
+*/
+var objA = new Object(); //声明一个对象 objA
+function Add(a,b){
+    this.sum = a+b;	 				
+}
+Add.call(objA,2,3);  
+echo(objA.sum);		//输出 5
+/*
+说明：add.call(objA,2,3); 我们应该理解为 add(2,3)然后把执行结果绑定给objcA对象。
+也就是：目标this变成了objA，但是实际执行的还是add对象(因为js中的函数就是对象)
+也可以这样理解：执行add的同时把add对象的所有属性都绑定给objA.通过这个特性复制了一个
+与add类似objA.利用这个思路可以模拟继承效果
+如果所有参数都没给，那么objA就默认为全局对象，在浏览器中就是window对象
+代码示例：
+*/
+
+function Person(){
+    this.age = 28;
+}
+Person.call();  
+echo(window.age); //输出：28
+
+
+/*
+知识点二：apply()用法
+ 语法：apply([thisObj[,argArray]]) 
+ 功能：与call类似，就是参数要求不同 
+ 说明：如果 argArray 不是一个有效的数组或者不是 arguments 对象，那么将导致一个 TypeError。 
+ 	   如果没有提供 argArray 和 thisObj 任何一个参数，那么 Global 对象将被
+	   用作 thisObj， 并且无法被传递任何参数。 
+代码示例：
+*/
+echo("-----------apply()应用--------------");
+Add.apply(objA,[3,6]);  			//注意第二个参数必须是数组
+echo(objA.sum);		//输出 9 
+
+//如果没有参数与call等同
+Person.apply();  
+echo(window.age); //输出：28
+
+//同学们回想下我们第三课学过的 callee返回当前执行函数的指针 
+echo("-----------caller()应用--------------");
+/*
+知识点三：
+语法格式：
+	functionName.caller  (用在被调用的函数中，而不是主调函数中)
+功能说明：对于函数来说，caller 属性只有在函数执行时才有定义。如果函数是由顶层调用的，那么 caller 包含的就是 null 。如果是在其他对象中调用caller，caller能够返回调用它的函数原信息。
+示例代码如下：
+*/
+function fnDL(){ 
+	if (fnDL.caller) { 	echo(fnDL.caller);	} 
+	else { 	echo("我直接执行了");	} 
+} 
+
+function myCaller() { 
+	fnDL(); 
+	echo("亲！我是MyCaller");
+} 
+myCaller(); 
+fnDL();
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

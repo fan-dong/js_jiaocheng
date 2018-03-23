@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点的创建于添加 - 动力学院</title>
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<pre>
+<!---创建子节点--->
+<ul id="oUl">
+<li><a href="#">动力学院原有的LI1</a></li>
+<li><a href="#">原有的li2</a></li>
+</ul>
+ 
+<script type="text/javascript">
+/*
+知识点一：节点的创建与添加
+	1、createElement()，创建元素节点用此方法
+		语法格式：document.createElement("tagName");
+		例如：document.createElement("div"); 这样就创建了一个div元素，注意不需要写结尾和尖括号。
+	2、createTextNode()，创建文本节点。
+		语法格式：createTextNode("PHP动力学院");
+	3、createDocumentFragment()，创建一个临时元素容器(也叫文档片段)
+		语法格式：var box = document.createDocumentFragment()
+		该方法返回一个元素容器，用于临时保存新创建的元素，以提高DOM操作的性能。
+//以上是节点创建常用的方法，以下是添加创建的节点常用的方法
+	1、appendChild(node)，将node节点添加父元素的末尾
+	2、insertBefore(newNode,refNode)，在父元素的参考节点refNode之前插入newNode节点
+	3、replaceChild(newNode,oldNode)，将childNodes中的oldNode节点替换成newNode
+	4、removeChild(node)，从childNodes中删除node节点
+
+//代码示例演示每个方法的使用情况
+*/ 
+
+var oUl = document.getElementById("oUl");
+//创建元素节点的方法
+var newLi1 = document.createElement("li"); 
+//创建文本节点的方法
+var newLi1Txt = document.createTextNode("我是新创建的节点li1中的文本");
+//把文本节点添加到li中(就是把小的逐级向大的内部添加)
+newLi1.appendChild(newLi1Txt);
+//把完整的新li节点添加到UL中
+oUl.appendChild(newLi1);
+
+//上面代码创建的有个问题，li中的文本缺少a标记，改进如下
+var newLi2 = document.createElement("li"); 
+//创建A元素并设置其属性
+var newLi2A = document.createElement("a"); 
+	newLi2A.href="http://www.baidu.com";
+	newLi2A.target = "_blank";
+//创建文本节点
+var newLi2Txt = document.createTextNode("连接词");
+//逐级向上级元素的内部添加
+newLi2A.appendChild(newLi2Txt);
+newLi2.appendChild(newLi2A); 
+oUl.appendChild(newLi2);
+
+
+echo("-----------createDocumentFragment()用法----------------");
+var fragment = document.createDocumentFragment();
+var li = null;
+
+for(var i=0;i<1000;i++){
+	li = document.createElement("li");
+	li.appendChild(document.createTextNode("通过Fragmeng片段可以减少渲染次数提高性能"));
+	 fragment.appendChild(li);
+	// oUl.appendChild(li); //理论上这一句比上一句效率低，但是实际情况是老浏览器基本是这样，新浏览器差不多。
+}
+oUl.appendChild(fragment);
+
+/*
+
+提示：	使用appendChild与createElement创建添加大量节点实战证明不是很高效。
+	一般使用innerHTML效率可以有N倍的提升。下一节，节点的替换和删除。 下下一节innerHTML。
+
+*/
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+
+</script>
+</pre>
+</body>
+</html>

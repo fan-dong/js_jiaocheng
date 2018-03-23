@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件类型-动力学院</title>
+<style type="text/css">
+div{ width:500px; height:300px; border:5px #666 solid;}
+input{ margin:20px; border:2px #06C solid;}
+</style>
+</head>
+
+<body>
+<pre>
+二、键盘事件
+	1.	keydown		某个键盘按键被按下时触发
+    2.	keypress	某个键盘按键被按下后，发生在keydown之后keyup之前
+    3.	keyup		某个键盘按键被松开 
+说明：keydown与kepress功能几乎完全一样根据需求选用。
+	1、如果对于可输入字符（例如：字母和数字等）可采用keypress或keydown
+    2、如果对于非可输入字符比如方向键其他控制键，只能用keydown ,
+    	非可输入字符不触发kepress事件             
+</pre>
+<div id="box">
+<input id="userName" type="text" value="" name="userName" size="30">
+</div>
+<script type="text/javascript">
+var userName = document.getElementById("userName");
+userName.onkeyup = function(){ alert("keyUp啦");}
+userName.onkeypress = function(){ alert("onkeypress啦");}
+userName.onkeydown = function(){ alert("keyDown啦");}
+</script>
+</body>
+</html>

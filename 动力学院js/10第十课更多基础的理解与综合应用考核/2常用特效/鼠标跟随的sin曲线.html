@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style type="text/css">
+span{ display:inline-block; position:absolute; float:left; width:1px; height:3px; background-color:#0C3;}
+</style>
+</head>
+
+<body>
+<h1 id="h1">您好</h1>
+<script type="text/javascript">
+function createSpan(x0,y0){
+	if(document.getElementsByTagName("span")){
+		var spanx = document.getElementsByTagName("span");
+		for(var j=0;j<spanx.length;j++)
+		document.body.removeChild(spanx[j]);
+	} 
+	//document.body.innerHTML = "";
+	 x0 = x0 || 100, y0= y0||100;
+	for(var i=0;i<360;i++){
+		var spant = document.createElement("span");
+		spant.style.top =y0+ Math.sin(i*Math.PI/180)*50+"px";
+		spant.style.left = (x0+i)+"px"
+		document.body.appendChild(spant);
+	}
+}
+
+
+document.onmousemove = function(ev){
+
+	var ev = event||ev;
+	var x0 = ev.clientX+50;
+	var y0 = ev.clientY+50;
+	createSpan(x0,y0);
+	h1.innerHTML = ev.clientX+" _ "+ev.clientY;
+}
+ 
+</script>
+</body>
+</html>

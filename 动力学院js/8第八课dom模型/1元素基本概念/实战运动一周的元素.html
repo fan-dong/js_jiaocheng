@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>运动一周的元素-动力学院</title>
+<style type="text/css">
+#box{ border:10px #0C3 solid; width:500px; height:300px;}
+#move {
+	width:100px;
+	height:50px;
+	border:5px solid #Ff0000;
+}
+</style>
+</head>
+
+<body>
+<div id="box">
+<div id="move"> </div>
+</div>
+<script language="javascript">
+var m= document.getElementById("move");
+//向右运动60像素，然后向下运动
+function R(){
+	m.innerHTML =  m.style.marginLeft ;
+	var z = parseInt(m.style.marginLeft);
+	var i = z>0?++z:1;
+	m.style.marginLeft = i+"px";
+	if(i<60) setTimeout(R,10);
+	else	B();				
+}
+
+R();
+//向下运动60像素，然后向左运动
+function B(){
+	m.innerHTML =  m.style.marginTop ;
+	var z = parseInt(m.style.marginTop);
+	var i = z>0?++z:1;
+	m.style.marginTop = i+"px";
+	if(i<60) {setTimeout(B,5);}
+	else{
+		L();
+	}	
+}
+
+//向左运动60像素，然后向上运动
+function L(){
+	m.innerHTML =  m.style.marginLeft ;
+	var z = parseInt(m.style.marginLeft);
+	var i = z>0?--z:1;
+	m.style.marginLeft = i+"px";
+	if(i>0) setTimeout(L,5);
+	else{
+			T();
+		}	
+} 
+
+//向上运动60像素，然后向右运动
+function T(){
+	m.innerHTML =  m.style.marginTop ;
+	var z = parseInt(m.style.marginTop);
+	var i = z>0?--z:1;
+	m.style.marginTop = i+"px";
+	if(i>0) setTimeout(T,200);
+	else R();	
+
+}
+</script>
+</body>
+</html>

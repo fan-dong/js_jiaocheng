@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点类型</title>
+<style type="text/css">
+.bordercls{ border:5px #0C3 solid;}
+.bgcls{ background:#06C;}
+</style>
+</head>
+
+<body>
+
+<pre>
+<div id="div1"><b>我们的</b>第二节点</div>
+<a href="phpdl.com" id="aid" title="超级链接Title">动力学院</a>
+<h1 class="bordercls" id="objh" align="center">通用属性</h1>
+<script type="text/javascript">
+/*
+知识点一：元素节点
+规定元素节点具有以下特点：
+	1、nodeType 值为1
+	2、nodeName 值为元素的标签名（还一个别名tagName）
+	3、nodeValue 值为null
+	4、parentNode 一般是Element,也可能是Document
+	5、其子节点可能是 Element、Text、Conment等
+代码示例：
+*/	
+var div1 = document.getElementById("div1");
+echo(div1.nodeName);	//输出：DIV，用途判断节点的名称
+echo(div1.nodeType);	//输出：1，用途判断节点的类型
+echo(div1.nodeValue);	//输出：null，用途获取节点值
+echo(div1.parentNode);	//输出：[object HTMLPreElement]，用途获取父节点
+echo(div1.parentNode.nodeName); //输出：PRE	，用途获取父节点名称
+echo(div1.childNodes);	//[object NodeList]	，用途获取子节点
+echo(div1.childNodes.length);	//输出：2，查看本节点下面子节点的个数
+echo(div1.childNodes.item(1).nodeValue);	//输出：第二节点	
+
+
+/*
+知识点二、属性节点常用方法与通用属性	
+	HTML每个元素都包含下列常用属性
+	1、id：元素在文档中的唯一标识符
+	2、title：元素细节的附加说明信息，一般鼠标放上去时候以提示形式显示。
+	3、className：与CSS特性对应。
+除了以上通用属性外，部分元素还有自己特有的属性。	
+*/ 
+var aid = document.getElementById("aid");
+//获取属性信息：getAttribute
+echo(aid.getAttribute("href"));			//输出：phpdl.com
+echo(aid.getAttribute("title"));	//超级链接Title	
+//设置属性信息：setAttribute()
+aid.setAttribute("title","我是动态TITLE");	//添加属性节点
+
+//删除属性信息：removeAttribute()
+aid.removeAttribute("href");
+
+//批量使用属性信息
+echo(aid.attributes.length);	//返回一个元素的属性个数
+//批量显示属信息
+for(var i=0;i<aid.attributes.length;i++){
+	echo(aid.attributes[i].nodeName +" = "+ aid.attributes[i].nodeValue);
+}
+
+
+
+
+echo("----------------知识点三获取元素的常用属性-----------------");
+var objH = document.getElementById("objh");
+echo(objH.id);	//输出：objh
+echo(objH.nodeName);	//输出：h1
+echo(objH.className);	//输出：bordercls
+echo(objH.align);	//输出：center
+objH.className = "bordercls bgcls";	//设置元素的CSS样式
+
+
+/*
+说明：元素对象.属性 ，可以快速访问和设置，是最常用的形式，但不是所有的都能通过这种方法得到我们想要的结果
+	例如：aid.href不一定能获取超连接href的值
+*/
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：DOM模型            *
+ ****************************
+ */
+</script>
+</pre>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>获取元素在body中的绝对X，Y坐标-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:5px green solid;
+	width:200px;
+	height:200px;
+	margin:100px;
+	position:relative;
+}
+#box2 {
+	height:100px;
+	width:100px;
+	margin-top:20px;
+	border:5px blue solid;
+	position:absolute;
+}
+#box3 {
+	height:50px;
+	width:50px;
+	margin-top:20px;
+	border:5px red solid;
+}
+</style>
+</head>
+<body>
+<div style=" position:absolute; top:20px;">
+<div id="box1">
+  <div id="box2">
+    <div id="box3"> </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+window.onload=function(){
+	var a=document.getElementById('box3');
+	alert(getxy(a));
+}
+
+function getxy(obj){
+	if(typeof obj=='object' && obj.nodeType==1){
+		var x=0,y=0,str;
+		while(obj.constructor!=HTMLBodyElement){
+			x+=obj.offsetLeft+obj.offsetParent.clientLeft;
+			y+=obj.offsetTop+obj.offsetParent.clientTop;
+			obj=obj.offsetParent;
+		}
+		str='x坐标为：'+x+ '\ny坐标为：'+y;
+		return str;
+	}
+}
+/*
+知识点一：offsetParent 用于查找离当前匹配元素最近的被定位的祖辈元素的距离。
+	如果上级容器元素未进行CSS定位, 则offsetParent属性的取值主流浏览器均以body元素作为参考。
+注意：当容器元素的style.display 被设置为 "none"时（译注：IE和Opera除外），offsetParent属性返回 null。
+	其实在父级定位元素被设置display:none时候使用offsetParent计算距离没有实际意义。
+
+题目：请对以上说明各做一个案例进行测试。
+*/
+</script>
+</body>
+</html>

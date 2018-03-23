@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件类型-动力学院</title>
+<style type="text/css">
+legend {
+	font-size:20px;
+	padding:0px 5px;
+}
+ul li {
+	min-height:30px;
+}
+</style>
+</head>
+
+<body>
+<pre>
+三、表单事件
+	oncopy事件，在复制时候触发
+    onpaste事件，在粘贴时候触发   
+    
+<textarea cols="60" rows="6" oncopy="alert('禁止复制！');return false;" onpaste="alert('禁止粘贴！');return false;">代码示例一：试试在此复制或粘贴！</textarea>
+</pre>
+<form action="" name="form1" id="form1" method="get">
+  <fieldset>
+    <legend>在线留言</legend>
+    <ul>
+      <li>姓名：
+        <input type="text" value="请输入用户名" onClick="alert(window.clipboardData.getData('Text'))" id="userName">
+      </li>
+      <li>手机(限定只能是数字)：
+        <input type="text" id="tel" value="055165990053" onKeyUp="this.value=this.value.replace(/\D/,'')">
+      </li>
+    </ul>
+    <textarea cols="60" rows="6" id="area">代码示例一：试试在此复制或粘贴！</textarea>
+  </fieldset>
+</form>
+<script type="text/javascript">
+//userName
+var userName  = document.getElementById("userName");
+var tel  = document.getElementById("tel");
+var  area = document.getElementById("area");
+area.oncopy = function(){
+	alert("禁止复制");
+	return false;
+} 
+area.onpaste = function(){
+	alert("禁止粘贴");
+	return false;
+} 
+tel.onbeforepaste=function(){
+	clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''));
+	 
+}
+tel.onblur=function(){
+	this.value = this.value.replace(/\D/g,"");
+}
+</script>
+</body>
+</html>

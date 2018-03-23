@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>表单事件之复选框应用案例-动力学院</title>
+<style type="text/css">
+h1 {
+	border:5px #0C3 solid;
+	width:100px;
+	height:100px;
+}
+</style>
+</head>
+
+<body>
+<form action="http://www.baidu.com" target="_blank" id="form1"  onSubmit="alert('OK')" name="myForm" >
+  <input type="submit" value="提交">
+  <button type="submit">自定义提交按钮</button>
+  <input type="image" src="http://www.seodongli.com/images/dong.png" width="50" title="图像提交按钮">
+</form>
+<h1 id="h1">提交表单</h1>
+<script type="text/javascript">
+var h1 = document.getElementById("h1");
+h1.onclick = function(){
+	//document.forms[0].submit();	 //表单提交可以这样做，不一定要提交按钮。
+	document.forms["myForm"].submit();	 //表单提交可以这样做。
+	//注意事项，使用submit()提交的表单不会触发onsubmit事件。
+}
+//如果这里和HTML中都有onsubmit事件会以这里为准
+document.forms["myForm"].onsubmit = function(ev){
+	var ev = event || ev;
+	alert("HHH");
+	//ev.preventDefault();	//事件的 preventDefault()方法可以阻止事件的提交，更推荐使用return false; 
+	return false;
+}
+</script>
+</body>
+</html>

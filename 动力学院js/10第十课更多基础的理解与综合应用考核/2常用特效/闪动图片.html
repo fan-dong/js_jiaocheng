@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>闪动图片特效</title>
+<style type="text/css">
+div {
+	border:5px #0f0 solid;
+	width:500px;
+	height:100px;
+	overflow:hidden;
+	position:relative;
+}
+span {
+	position:relative;
+	float:left;
+	width:100px;
+	height:100px;
+	background:#09C;
+	text-align:center;
+	font-size:60px;
+	line-height:100px;
+	color:#fff;
+	border-radius:20px;
+	margin-right:20px;
+	top:100px;
+}
+</style>
+</head>
+
+<body>
+<div id="box"><span>动</span><span>力</span><span>学</span><span>院</span></div>
+<script type="text/javascript">
+var box = document.getElementById("box");
+var arr = box.childNodes;
+function Box(j){
+	var i = 100;
+	function A(){
+		i -=1;
+		box.childNodes[j].style.top= i +"px";
+		if(i>0) setTimeout(A,1);
+	}
+	A();
+}
+
+setTimeout(function(){Box(0);},100)
+setTimeout(function(){Box(1);},1000)
+setTimeout(function(){Box(2);},2000)
+setTimeout(function(){Box(3);},2100)
+
+box.childNodes[3].onmouseover = function(){
+	var i=0;
+	var obj =this;
+	function M(){
+		i++;
+		obj.style.top= i+"px";
+		if(i<10) setTimeout(M,1);
+	}
+	M(obj);
+	
+}
+box.childNodes[3].onmouseout = function(){
+	alert(this.offsetTop);
+	var i=0;
+	var obj =this;
+	function M(){
+		i++;
+		obj.style.top= i+"px";
+		if(i<10) setTimeout(M,1);
+	}
+	M(obj);
+} 
+
+/*
+代码示例二：批量运动
+function Box(){ 
+var i = 100,j=0;
+function A(){
+	i--;
+	box.childNodes[j].style.top= i +"px";
+	if(i>0) setTimeout(A,1);
+	else{
+		j++;
+		i=100;
+		if(j<4) setTimeout(A,1);
+	}
+}
+A();
+}
+*/
+</script>
+</body>
+</html>

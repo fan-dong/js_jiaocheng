@@ -1,0 +1,106 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：this关键字基本应用
+	this总是指向调用它的对象（在简单上下文环境下），和在哪里声明没有关系。
+	如果没有明确的调用对象this就是指向最顶层对象，在网页中就是window对象
+*/
+//情况一：this指向全局变量
+var i= 1;
+function fnA(){
+	alert(this.i);
+}
+//fnA();	//输出：1
+
+//情况二：作为对象的方法，this代表具体某个对象
+var objA = {};
+objA.i = 2;
+objA.m = fnA;	//注意这里需要让对象中的属性指向这个函数才行。
+//objA.m();	//输出2，这里不能使 objb.fnA()因为fnA不是objb对象的一个属性。
+
+//情况三：作为构造函数
+function fnB(){
+	this.j = 3;
+}
+var objB = new fnB();
+//alert(objB.j); //输出：3
+
+//情况四：在apply()中this总是指向第一个参数指定的对象，如果没有给参数默认指向window
+var c =4;
+function fnC(){
+	alert(this.c);
+}
+var objC = new Object();
+objC.c = 5;
+objC.m = fnC;
+//objC.m.apply();		//输出：4
+//objC.m.apply(objC);   //输出：5
+
+/*
+知识点二：在复杂情况下this是多变的，看下面的例子
+	1、函数中的子函数中的this默认指向window,在js中this没有传递性
+*/
+var b = 2008;
+function fnB(){
+	alert(this.b);
+	+function(){alert(this.b);}();
+	function fnB1(){alert(this.b);}
+	fnB1();
+}
+var oB = {};
+oB.b = 2011;
+oB.m = fnB;
+oB.m();
+//以上程序输出2011,2008,2008  
+
+/*改进以上代码如下：
+var b = 2008;
+function fnB(obj){
+	alert(this.b);
+	+function(){alert(obj.b);}();
+	obj.fnB1 = function (){alert(this.b);}
+	oB.fnB1();
+}
+var oB = {};
+oB.b = 2011;
+oB.m = fnB;
+oB.m(oB);
+
+//说明:以上两个例子表明，函数中的子函数的this如果没有明确指定给其绑定对象的话就会指向window对象
+//指定的方法可以通过传递参数给其绑定对象。
+*/
+
+
+/*
+知识点三：在对象中通过全局函数调用对象的方法
+
+var i = 2014;
+function fnA(fn){
+	fn();
+}
+var o = {
+	i:2008,
+	fnB:function(){
+			alert(this.i);
+		},
+	fnC:function(){
+		this.fnB();		//输出2008
+		fnA(this.fnB);  //输出2014,子函数在传递参数过程中变量作用域发生了变化
+	}		
+}
+o.fnC();
+
+//说明：通过例子发现在对象内部通过全局函数去调用局部函数时候，函数中的this环境发生了改变。
+//如何实现在全局函数中调用对象的内部函数时让this指向对象保持不变呢？看下节
+*/
+
+
+</script>
+</pre>

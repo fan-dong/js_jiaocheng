@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件类型-动力学院</title>
+</head>
+
+<body>
+<pre>
+<script type="text/javascript">
+/*
+知识点一：
+	将字符转换成对应的ASCII码用charCodeAt()方法
+	语法格式：字符.charCodeAt();即可返回字符对应的ASCII码
+	语法格式二：字符串.charCodeAt(索引数值)，这样即可返回字符串中索引在第几个的字符的ASCII码
+	 
+知识点二：将ASCII码转换成对应的字符用方法 fromCharCode()
+	语法格式：String.fromCharCode(ASCII码值);	
+*/
+var str = "ABC";
+var aAscii = str.charCodeAt();
+document.writeln(aAscii);
+var str2 = String.fromCharCode(aAscii);
+document.writeln(str2);
+</script>
+</pre>
+</body>
+</html>

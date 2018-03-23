@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>键盘组合事件-动力学院</title>
+</head>
+
+<body>
+<script type="text/javascript">
+document.onkeydown = function(ev){  
+			var ev = window.event || ev;  
+			//alert(ev.keyCode);
+            if (ev.keyCode == 13 && ev.ctrlKey) {  
+                alert("你按下了ctrl+enter");  
+            }  
+			if (ev.keyCode == 83 && ev.ctrlKey) {  
+                alert("你按下了保存键 \n ctrlKey的键码是17，s键码是13");  
+            }  
+}			
+</script>
+</body>
+</html>

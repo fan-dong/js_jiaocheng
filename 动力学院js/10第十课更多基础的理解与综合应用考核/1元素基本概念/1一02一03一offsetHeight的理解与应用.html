@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>clientHeight的理解-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:30px #000 solid;
+	width:260px;
+	height:200px;
+	margin:20px 5px;
+	line-height:50px;
+	padding:10px;
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+ 
+</div>
+<h1 id="scrollTopVal"></h1>
+<script language="javascript">
+/*
+知识点一：offsetHeight 等于元素总高度减去上下margin部分。
+公式: offsetHeight = height + padding-top+padding-bottom+border-top-width+border-bottom-width  之和。  
+
+知识点二：offsetWidth 等于总宽度减去左右margin部分。
+公式： offsetWidth = width+padding-left+padding-right+border-left-width+border-right-width
+*/
+scrollTopVal.innerHTML =  box1.offsetHeight ;
+scrollTopVal.innerHTML  +=  "<br>"+box1.offsetWidth ; 
+</script>
+</body>
+</html>

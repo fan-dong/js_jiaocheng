@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点的创建于添加 - 动力学院</title>
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<pre>
+<!---创建子节点--->
+<ul id="oUl">
+<li><a href="#">动力学院原有的LI1</a></li>
+<li><a href="#">原有的li2</a></li>
+</ul>
+<!--在特定节点前插入节点--> 
+<div id="box">
+<h1 id="h1t">我之前要插入新内容</h1>
+</div>
+<script type="text/javascript">
+/*
+知识点一：节点的创建与添加
+	1、createElement()，创建元素节点用此方法
+		语法格式：document.createElement("tagName");
+		例如：document.createElement("div"); 这样就创建了一个div元素，注意不需要写结尾和尖括号。
+	2、createTextNode()，创建文本节点。
+		语法格式：createTextNode("PHP动力学院");
+	3、createDocumentFragment()，创建一个临时元素容器(也叫文档片段)
+		语法格式：var box = document.createDocumentFragment()
+		该方法返回一个元素容器，用于临时保存新创建的元素，以提高DOM操作的性能。
+//以上是节点创建常用的方法，以下是添加创建的节点常用的方法
+	1、appendChild(node)，将node节点添加父元素的末尾
+	2、insertBefore(newNode,refNode)，在父元素的参考节点refNode之前插入newNode节点
+	3、replaceChild(newNode,oldNode)，将childNodes中的oldNode节点替换成newNode
+	4、removeChild(node)，从childNodes中删除node节点
+	节点修改格式都是
+		parentElement.方法()的形式。
+
+//代码示例演示每个方法的使用情况
+*/ 
+
+var oUl = document.getElementById("oUl");
+//删除节点
+oUl.removeChild(oUl.childNodes[0].nextSibling);	//原有的LI1，就被删除了
+
+//替换节点
+//创建一个新节点
+var li = document.createElement("li");
+var txt = document.createTextNode("我替换了另外一个节点");
+li.appendChild(txt);
+//用新节点替换旧节点
+oUl.replaceChild(li,oUl.childNodes[2]);
+
+//在特定节点前插入新节点
+var h2 = document.createElement("h2");
+var h2txt = document.createTextNode("我是H2中的内容");
+	h2.appendChild(h2txt);
+var box = 	document.getElementById("box");
+var h1t = 	document.getElementById("h1t");
+box.insertBefore(h2,h1t);
+
+
+ 
+</script>
+</pre>
+</body>
+</html>

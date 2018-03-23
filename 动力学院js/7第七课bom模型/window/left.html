@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<style type="text/css">
+h2{ cursor:pointer;}
+</style>
+<body>
+<h2 onclick="tops();">控制tops</h2>
+<h2 onclick="self()">控制left</h2>
+<h2 onclick="right();">控制right</h2>
+<script type="text/javascript">
+//从顶层向下访问（推荐方法）谷歌浏览器需要在网站环境下测试
+function tops(){
+	top.frames.tops.document.bgColor="#ff0000";
+}
+
+//直接访问自己
+function self(){
+	 document.bgColor="#0000ff";
+}
+//通过自己找的父亲，然后访问父亲下面的。
+function right(){
+	window.parent.frames.right.document.bgColor="#00ff00";
+}
+</script>
+</body>
+</html>

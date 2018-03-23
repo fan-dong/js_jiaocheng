@@ -1,0 +1,68 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：组合式继承
+说明：组合式继承就是将前面学到的原型链与构造函数的技术组合到一块，发挥二者之长。
+本质是：通过原型链实现共享方法和属性的基础，通过借用构造函数来实现对实例属性的继承。这样既保证了
+对函数的复用，又能保证每个实例都有自己的属性。
+代码示例如下：
+*/
+ 
+function A(name){
+	this.name = name;
+	this.like = ['打球','跑步'];
+}
+A.prototype.sayName = function(){
+	echo(this.name);
+};
+
+function B(name,age){
+	A.call(this,name);				//第二次调用
+	this.age = age;
+}
+
+B.prototype = new A();				//第一次调用
+B.prototype.sayAge = function(){
+	echo(this.age);
+};
+
+
+var b = new B("张三",18)
+b.sayName();		//输出：张三
+b.sayAge();			//输出：18
+b.like.push("学习");
+echo(b.like);		//输出：打球,跑步,学习
+
+var b2 = new B("李四",28);
+echo(b2.like);		//输出：打球,跑步 。说明这个是借用构造函数的优点每个对象实例都有自己的一份属性副本
+
+echo(b.sayName == b2.sayName);	//true 。 这个是原型继承的优点，共享一个函数
+
+
+/*
+组合式继承是在真实项目中最常用的继承模式之一，推荐大家使用。关于对象继承我们就讨论到这里。
+继承的用途：继承一般用在中大型项目中，在微小型项目中使用的比较少。大家先理解这种现象。如果看的这样的用法不至于产生困惑。
+*/
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

@@ -1,0 +1,120 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：“原型”的定义及理解
+1、我们创建的每个函数都有一个默认的prototype(原型)属性，这个属性是一个指针，指向一个对象，
+	这个对象的设计的用途是包含可以由特定类型的所有实例共享的属性和方法。
+	注意：我们也可以修改这个指针，指向其他对象，在未修改情况下这个指针指向的我们称为构造函数的默认原型（以下简称《默认原型》）。
+	
+2、构造函数的“默认原型”默认情况下有两个属性一个是指向构造函数的constructor，
+	另一个是指向“父类的原型对象”的指针。一般情况下是指向Object对象的原型（因为所有函数默认都继承自Object）。
+
+知识点二：“对象的实例”的定义及理解
+1、通过构造函数创建一个新实例，默认情况下这个实例继承了构造函数中的prototype属性。
+	也就是说获取了“构造函数中prototype属性保存的指针地址”的一个副本到“实例的prototype属性中”。
+	这样：构造函数的实例就能够指向“构造函数的原型”，注意不是指向构造函数。
+
+
+知识点三：原始原型与重写原型的区别于联系
+1、如果我们重写了给构造函的prototype属性，那么这个重新的时间顺序非常重要。
+	情况一：如果是在先创建构造函数的实例后重写了“构造函数的prototype属性”，那么构造函数的实例将无法获取新指向的原型中的内容。
+	情况二：如果是在创建新对象之前重写了构造函数的prototype属性，那么构造函数的实例继承的prototype是指向新原型对象的。
+
+2、	“构造函数的默认的原型对象”是系统自动创建的，是在对象创建之前自动拥有的。
+	所以向默认原型中添加的属性和方法出现在实例创建之后也能被实例方法。
+
+3、构造函数的默认原型对象包含一个指向当前构造函数的指针,重写的原型失去了这个特征。
+
+
+下面分别用代码解释以上三个知识点：	
+*/ 
+ 
+document.writeln("-------实例一：原型及对象的定义及理解------");
+function P(){ }
+document.writeln(P.prototype.constructor);	//输出：function P(){ }
+//这个说明默认有个原型对象存在，并且里面有个constructor属性，指向构造函数P()
+
+P.prototype.name = "张三";					//给原型对象添加属性
+
+var p1 = new P();							//创建一个对象，系统会自动复制P.prototype变量中的指针地址给p1的__proto__属性
+
+document.writeln(p1.name);	//输出：张三 ，说明对象的实例能够访问到原型对象中的共享内容
+
+//说明:下面一行代码需要在IE11或谷歌或火狐中测试。旧版IE均不允许访问"__proto__" 属性
+document.writeln(p1.__proto__  == P.prototype);  //输出：true,说明在对象的实例中也保留了一个属性与构造函数中的prototype一致。
+
+/*
+知识点四：
+判断一个对象的原型是指向哪里的方法，系统提供了 isPrototypeOf()和getProtoTypeOf()两个方法
+注意：这两个方法仅供学习理解对象使用，实用意义不大，因为旧版浏览器不兼容。
+用法如下：
+*/
+document.writeln(P.prototype.isPrototypeOf(p1)); //输出true, 用来检测一个对象的原型是不是"某某某"
+document.writeln(Object.getPrototypeOf(p1) == P.prototype);	 //输出：true，通过对象来获取其指向的原型。
+/***********************************************************************************************************************/
+
+document.writeln("-------实例二：原始原型与重写原型的区别------");
+//一原始原型具有动态型，因为其已经提前被系统声明好。例如
+
+function  Cat(){}
+var cat = new Cat();			//先定义对象
+Cat.prototype.name = "咪咪";	//后给原型对象添加属性
+document.writeln(cat.name);		//输出：咪咪
+
+//当然如果把输出放到上面，无法获取到咪咪例如
+/*
+function  Cat(){}
+var cat = new Cat();			//先定义对象
+document.writeln(cat.name);		//输出：undefined
+Cat.prototype.name = "咪咪";	//后给原型对象添加属性
+*/
+
+//下面看重写原型
+function  Dog(){}
+var dog = new Dog();			//先定义对象
+Dog.prototype = {
+	name:"旺旺" 
+};
+document.writeln(dog.name);		//输出：undefined
+
+/*
+代码说明：
+	使用Dog.prototype =  这种格式是重写原型，已经和原有原型失去联系。是让构造函数的的原型属性指针指向新对象。
+	这个时候如果是在创建新对象之后进行定义原型。就相当于 Dog第一次创建对象dog时候给他的地址是“原始原型对象的地址指针”
+	dog中的__proto__就指向了原始原型对象的地址。
+	但是后来，我们手工修改了Dog.prototype这个属性中的地址，对于dog.__proto__并没有收到通知。所以无法访问新对象。
+改进以上代码如下就可以访问
+*/
+
+//改变顺序,把原型对象添加放前面
+function  Pig(){}
+Pig.prototype = {
+	name:"猪猪"
+};
+var pig = new Pig();				//然后才定义的对象
+document.writeln(pig.name);		//输出：猪猪   , 这个时候就可以访问。
+
+/*
+说明：
+	因为是先修改了构造函数中的prototype的属性，所以给pig对象的__proto__ 是与 Pig.prototype 当前值相等的。
+*/
+
+
+document.writeln(Pig.prototype.constructor);	// 输出：Object，原因修改后的原型对象默认指向Object不在指向Pig这个构造函数。
+
+//我们可以通过手工指定回来让其指向，Pig
+
+Pig.prototype.constructor = Pig;
+document.writeln(Pig.prototype.constructor);   //输出：function  Pig(){}
+
+
+//通过以上的例子及说明，希望同学们能够理解原型是什么？构造函数是什么？原型与对象的关系？原型与构造函数的关系？构造函数与对象的关系。
+</script>
+</pre>

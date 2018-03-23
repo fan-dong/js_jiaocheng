@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件对象-动力学院</title>
+<style type="text/css">
+#box {
+	width:500px;
+	height:300px;
+	background-color:#CCC;
+	position:relative;
+}
+#box1 {
+	width:300px;
+	height:150px;
+	background-color:#0C3;
+	position:absolute;
+}
+#box2 {
+	width:200px;
+	height:200px;
+	background-color:#09C;
+	position:absolute;
+}
+</style>
+</head>
+
+<body>
+<div id="box">
+  <div id="box1"></div>
+  <div id="box2"></div>
+</div>
+<pre>
+<script language="javascript">
+/*
+事件对象：在我们操作键盘或鼠标等任意事件时候系统会自动生成一个事件对象event，事件对象有如下特点。
+	1、事件对象保存着所有与事件相关的信息。
+	2、event对象只有在事件发生时才能被访问。
+	3、所有的事件处理函数执行完毕后，event对象自动消失。
+	4、标准的DOM规定 event对象必须作为唯一的参数传给事件处理函数。
+	5、IE老版本浏览器中事件对象是window的一个属性event.	
+//事件对象常用的属性和方法
+	1、 button  鼠标事件，值对应鼠标的按键
+	2、	keyCode 键盘事件，按键的代号。
+	3、 clientX 与 clientY 鼠标指针在浏览器中的位置，不包含工具栏滚动条等。
+	4、 screenX	与 screenY 鼠标指针相对于计算机平面的坐标位置
+	5、 target 引起事件的元素/对象， IE老浏览器中是 srcElement
+	6、 type事件的名称
+	7、 relatedTarget 鼠标指针所离开或正进入的元素，在老IE是 fromElement与toElement
+*/
+var box = document.getElementById("box");
+//获取按键事件 
+document.onkeydown = function(ev){
+	var ev = window.event || ev;
+	alert(ev.target||ev.srcElement);
+	alert(String.fromCharCode(ev.keyCode)+"编码是："+ev.keyCode);
+}
+
+//获取鼠标事件
+box.onmousedown = function(ev){
+	var ev = window.event || ev;
+	if(ev.button==0){alert("你点击了左键"); alert(ev.target);};
+	if(ev.button==1){alert("你点击了滚轮键");};
+	if(ev.button==2){alert("你点击了右边键");};
+}
+/*
+说明：标准DOM规定，鼠标的左键是 0，滚轮键是 1，右键代码是2.
+老版本IE浏览器认为：左键是1，右键是2.滚轮键是 4.
+真实项目中主要是左右键，其他很少使用。如果没有滚轮事件，可以简单这样处理
+2是右键，其他都是左键或不做任何处理。如果项目用到滚轮就要一个个验证，判断浏览器版本对比。
+//判断方法如下：
+*/
+//如下方法不易记忆，可以保存到日志上，需要时候粘贴下就行。
+//当然也可以用其他方法判断。比如对比Navigator对象的userAgent
+if(document.implementation.hasFeature("MouseEvents","2.0")){
+	alert("DOM2.0");
+}
+else{alert("IE");}
+
+
+
+/* 
+	有了上面事件，我们是不是能控制鼠标右键的菜单？
+	能处理各种单击响应，处理各种键盘按键的响应。
+	下一节：事件对象二。
+*/	
+ 
+</script>
+</pre>
+</body>
+</html>

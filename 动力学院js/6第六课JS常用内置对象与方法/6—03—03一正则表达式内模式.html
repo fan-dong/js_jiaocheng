@@ -1,0 +1,39 @@
+<pre>
+<script type="text/javascript">
+/*
+知识点一：关于g模式在exec中的应用，需要多次调用，每次调用会自动寻找下一个。
+这样我们可以通过循环来解决匹配所有的问题。
+代码示例如下：
+*/
+var p = /p/g;
+var str = "php";
+var t1 = p.exec(str);
+var t2 = p.exec(str);
+document.writeln(t1.index);
+document.writeln(t2.index);
+
+//代码示例二：通过循环查找所有 php
+/*
+var p = /php/ig;
+var P = /[^php]/ig; //排除 php三个字符
+var str = "你喜欢 php呢还是 Php呢？我喜欢 PHP";
+while( (rs = p.exec(str))!=null){ 
+	document.writeln(rs);
+}
+*/
+
+//问题提出：对于上面的问题是如果我只想排除php，但是不想排除 ASP
+/*
+var P = /[^php]/ig; //排除 p h p三个字符无论是否连续。ASP中的p也会被排除
+var str = "你喜欢 php呢还是 ASP ";
+while( (rs = P.exec(str))!=null){ 
+	document.writeln(rs);
+}
+*/
+//问题解决：通过替换方法，排除与模式等价的
+var P = /php/gi;  
+var str = "你喜欢php呢还是PHP ASP ";
+var t= str.replace(P,"");
+document.writeln(t);
+</script>
+</pre>

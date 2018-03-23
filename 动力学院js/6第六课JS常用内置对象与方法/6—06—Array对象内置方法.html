@@ -1,0 +1,49 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象       *
+ ****************************
+ */
+/* 
+知识点一：Array.prototype.slice.call() 方法是固定组合，和我们之前学的call区别
+语法格式：Array.prototype.slice.call(对象)，将具有长度的对象，转化成数组返回。
+返回值：返回创建的新数组，不改变原对象。
+代码示例如下：
+*/ 
+var o = {
+	length:3,
+	0:"张三",
+	"2":18, 
+};
+document.writeln(o.length);
+var arr = Array.prototype.slice.call(o);
+document.writeln(arr.constructor==Array);  //输出 true 说明arr是数组。
+for(var p in arr){
+	document.writeln(p+" = "+arr[p]);
+}
+
+/*
+说明：对象o要满足具有length属性，并且里面的其他属性名字是可以转化成数值的
+并且转化后的数值要比length小1.超出的部分也会被忽略。
+练习题目: 请自定义函数实现与 Array.prototype.slice.call()同样的功能
+*/
+
+
+/*
+Array.prototype.slice.call()，实际应用在arguments对象上为主
+*/
+
+function A(){
+	var a = Array.prototype.slice.call(arguments).slice(2,4);
+	document.writeln(a);  //输出 3,4
+}
+
+A(1,2,3,4,5,6);
+
+
+ 
+</script>
+</pre>

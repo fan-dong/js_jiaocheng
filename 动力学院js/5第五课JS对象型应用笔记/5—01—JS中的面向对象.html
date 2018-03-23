@@ -1,0 +1,174 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+面向对象（Object-Oriented ，OO）语言中离不开类的概念，通过类可以创建任意多个具有相同属性和方法的对象。
+但是JS中没有类的概念，JS的对象和PHP的对象有很大不同。
+	对象中都有属性和方法两个概念：
+	例如：人有名字，身高，体重等这些基本标量被称为属性，
+		人能说话，能走动这些有能力做什么的功能被称做方法。
+代码解释：
+*/
+//创建Object实例基本方法有两种分别如下
+//方法一
+echo("--------创建对象的方法一----------")
+var person1 = new Object();
+person1.name = "张三";
+person1.age = 20;
+person1.say = function(){
+		echo("我是say()方法...");
+	};
+echo(person1.name);		//推荐这样访问，但是如果是非合法标识符就需要用下面方法访问。
+echo(person1["age"]); 	//对象中的属性可以这样访问
+person1.say();	//输出：我是say()方法...
+
+//方法二：对象字面量表示法
+echo("--------创建对象的方法二----------")
+var person2 ={
+		name:"李四",
+		age:18,
+		"my name":"特殊情况",
+		say:function(){
+			echo("我是person2的say()方法...");
+		} 
+	}
+echo(person2.name);		//输出：李四
+echo(person2.age);		//输出：18
+person2.say();			//输出：我是person2的say()方法...
+echo(person2["my name"]);	//输出：特殊情况， 只能这样访问
+var t = "my name";			//也可以用变量来保存属性名
+echo(person2[t]);			//输出：特殊情况
+//当然还可以这样,下面这个上面一个形式等价，上面一个形式更常用。
+var person3 ={};
+person3.name = "王五";
+person3.age = 28;
+person3.say = function(){
+		echo("我是person3的say()方法...");
+	};
+person3.say(); //输出：我是person3的say()方法...
+/*
+说明：
+1、首先区别下两种访问方法，点号法与中括号方法，两种多能访问对象的属性，区别如下。
+1.1、点号只能是合法标识符并且不能用引号不能用变量。
+1.2、中括号中必须用引号，如果不用引号默认是变量
+1.3、属性名要求比较宽松，可以带双引号也可以不带，可以是非字母非数字，
+	如果是特殊符号需要加引号
+2、JS中很多引用类型都是Object的一个实例
+*/
+
+
+
+
+//方法三：构造函数模式创建对象
+echo("--------构造函数模式创建对象----------")
+
+function Person4(name,age,hobby){
+	this.name = name;
+	this.age = age;
+	this.hobby = hobby;
+	this.Say = function(){
+		echo("我就是方法了！"+ this.name);
+	}
+}
+
+var person41 = new Person4("张三",18,["打球","唱歌"]);
+var person42 = new Person4("李四",28,["跳舞","游泳"]);
+echo(person41.age);		//输出18
+for(p in person41){
+	echo(person41[p]);
+}
+/*
+输出：
+张三
+18
+打球,唱歌
+function(){
+		echo("我就是方法了！"+ this.name);
+	}
+
+代码说明：
+使用构造函数创建对象实例必须使用new操作符，以这种方式经历了以下四个步骤
+1)创建一个新对象
+2)将构造函数的作用域赋给新对象(this代表当前调用对象)
+3)执行构造函数中的代码（为新对象添加属性）
+4)返回新对象
+*/
+/*
+知识点四：constructor属性的理解
+上面的例子中 person41与person42分别保存着Person4的不同实例，这两个对象都有一个constructor属性
+这个属性指向 Person4
+代码示例：
+*/
+echo("---------看看constructor属性的样子------------")
+echo(person41.constructor);
+/*
+输出：
+function Person4(name,age,hobby){
+	this.name = name;
+	this.age = age;
+	this.hobby = hobby;
+	this.Say = function(){
+		echo("我就是方法了！"+ this.name);
+	}
+}
+*/
+echo("---------看看Person4的样子------------")
+echo(Person4);
+/*
+输出：
+function Person4(name,age,hobby){
+	this.name = name;
+	this.age = age;
+	this.hobby = hobby;
+	this.Say = function(){
+		echo("我就是方法了！"+ this.name);
+	}
+}
+说明：实例的constructor属性是生成他的那个构造函数。构造函数设计的目的是用来标识对象的类型
+比如：是人类还是鸟类
+*/
+
+echo("----------知识点五：构造函数与普通函数的区别-------------")
+/*
+构造函数与普通涵的区别就是调用方式不同，所有普通函数只要通过new操作符来调用，他就可以称为构造函数，否则就是普通函数。
+代码示例：
+*/
+//以构造函数调用
+var person43 = new Person4("王五",33,"下棋");
+person43.Say();  //我就是方法了！王五
+//以普通函数调用
+Person4("赵六",33,"斗地主");
+window.Say();	//我就是方法了！赵六
+/*
+说明：当以普通函数调用时候this就代表是当前对象，默认是window对象（关于window见后面章节）
+当以构造函数调用是返回给新生成的对象。
+*/
+
+echo("----------知识点六：构造函数创建对象的问题-------------")
+echo(person41.Say == person42.Say); //输出 false,证明Say方法是不同的出现重复
+/*
+上面实例中person41,person42有相同的构造函数，属性是不同的，但是方法可以是相同的。
+也就是说 Say()方法，分别在person41和person42中保存了两份副本，并且两份副本完全一样只是属于不同的示例。
+这样做就类似我们声明了两个功能一样的函数(仅仅作用域不同)，这样会浪费资源。
+改进如下文：5-02-JS构造函数的问题讨论
+*/
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

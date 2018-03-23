@@ -1,0 +1,92 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象       *
+ ****************************
+ */
+var date = new Date();
+
+var y = date.getFullYear(); //返回四位年份（例如：2008）
+var m = date.getMonth();	//返回月份，值是[0-11]每个加1就是当前月份
+var dd = date.getDate(); 	//返回当前日期值在01-31之间
+var h = date.getHours();	//返回小时，值是[0-23],24小时制
+var mm = date.getMinutes();	//返回分钟，值是[0-59] 
+var s = date.getSeconds();	//返回秒数，值是[0-59]
+var d = date.getDay();   //返回星期几值从礼拜日到礼拜六[0-6]
+
+//毫秒
+var ms = date.getMilliseconds(); //返回毫秒数，值从0到999,1000毫秒等于1秒
+var mst = date.getTime();		 //返回从GMT时间：1970年1月1日0点0分0秒起经过的毫秒数，可以使用这个轻松计算时间差
+
+//输出测试：
+echo(y+"年");
+echo((m+1)+"月");
+echo(dd+"日");
+echo(h+"点");
+echo(mm+"分");
+echo(s+"秒");
+echo(d+"礼拜几");			//如果是礼拜天输出 0 ，礼拜一输出 1 
+
+
+//豪秒级
+echo(ms);
+echo(mst);
+
+/* 除了自动获取系统当前时间外我们还可以为Date对象指定初始化参数用法如下
+	new Date("month dd,yyyy hh:mm:ss");
+	new Date("month dd,yyyy");
+	new Date("yyyy,mth,dd,hh,mm,ss");
+	new Date("yyyy,mth,dd");
+	new Date(ms);
+参数含义如下：
+	yyyy：4位数表示的年份	
+	month：用英文表示的月份 January到December
+	mth：用整数表示的月份值[0-11]
+	dd：表示一个月中的第几天值[0-31]	
+	hh：小时数,取值 [0-23]
+	mm：分钟数，取值[0-59]
+	ss：秒数，取值[0-59]
+	ms：豪秒数,
+*/
+echo('-------用给定日期初始化Date()-------');
+var dt1 = new Date(2008,11,28,8,50,45);
+echo(dt1.getFullYear());
+echo(dt1.getMonth());
+echo(dt1.getDate());
+echo(dt1.getHours());
+echo(dt1.getMinutes());
+echo(dt1.getSeconds());
+echo(dt1.getTime());
+
+
+/*本课习题
+习题一：
+在网页上面输出当前的年月日，时分秒，礼拜几的功能。
+
+习题二：通过毫秒的特征计算一个for循环100万次所需要的时间差。
+for(i=0;i<1000000;i++){
+	//可以放不同复杂度代码测试
+}
+
+习题三：
+2014年08月01日上午9点8分7秒
+与2008年08月01日上午8点7分6秒的
+相差多少年？多少月？多少日？多少分？多少秒？
+*/
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

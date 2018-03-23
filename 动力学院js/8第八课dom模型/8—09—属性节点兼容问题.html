@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>属性节点兼容问题 - 动力学院</title>
+<style type="text/css">
+#box{ border:5px #0C3 solid;}
+</style>
+</head>
+
+<body>
+<pre>
+<div   title="动力学院" id="box">动力教育</div>
+<script type="text/javascript">
+//获取a对象
+var box = document.getElementById("box");
+
+/*
+知识点一：获取元素全部属性对象方法用  elementObj.attributes
+说明：attributes对象包含了一个属性个数的常用属性 length ，在IE7,8下的理解与标准浏览器理解不同。
+IE7下会输出所有属性,无论是否指定的属性，为了避免这个问题可以用以下代码解决：
+*/
+for(var p in box.attributes){
+	if(box.attributes[p]==null) continue;		//屏蔽所有为空的 属性
+	if(!(box.attributes[p].specified)) continue;	//屏蔽所有未指定的 
+	document.writeln(box.attributes[p].nodeName+" = "+ box.attributes[p].nodeValue);
+} 
+
+
+/*
+IE也提供”specified“进行检测，在IE下如果指定了节点specified属性会返还true否则会返回false
+其他浏览器都返回true.
+*/
+</script> 
+</pre>
+</body>
+</html>

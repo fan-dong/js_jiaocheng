@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>scrollTop属性与onscroll事件的理解-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:2px #999 solid;
+	width:1000px;
+	height:290px;
+	margin:10px;
+	overflow:hidden;
+}
+#box2 {
+	width:3500px;
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+  <div id="box2"> <img src="banner.jpg" width="1000" height="272"> <img src="banner.jpg" width="1000" height="272"> <img src="banner.jpg" width="1000" height="272"> </div>
+  <div id="box3"></div>
+</div>
+<div id="box4"></div>
+<script language="javascript">
+oDiv1 = document.getElementById("box1");
+oDiv2= document.getElementById("box2");
+oDiv4= document.getElementById("box4");
+
+function st(){
+	 oDiv4.innerHTML=oDiv1.scrollLeft;
+	oDiv1.scrollLeft = oDiv1.scrollLeft+100;
+	if(oDiv1.scrollLeft>2000){
+	   	oDiv1.scrollLeft = 0;
+	}
+	t = setTimeout(st,100);
+}
+st();
+oDiv1.onmouseover = function(){
+  clearTimeout(t);	
+}
+oDiv1.onmouseout = function(){
+	st();
+}
+</script>
+</body>
+</html>

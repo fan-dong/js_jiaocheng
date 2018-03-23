@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点类型</title>
+<style type="text/css">
+ 
+</style>
+</head>
+
+<body>
+<pre>
+<ul id="ul1">
+<li><a href="#">动力学院</a></li>
+<li><a href="#">动力课堂</a></li>
+<li><a href="#">PHP学院</a>欢迎你</li>
+</ul>
+<script type="text/javascript">
+/*
+知识点一：判断节点类型
+	经常我们需要的是知道一个对象是元素、是属性、还是文本，下一节节点查找我们将看的他的用途。
+	元素节点的 nodeType值为1
+	属性节点的nodeType值为2
+	文本节点的nodeType值为3
+	
+ 
+*/ 
+var ul = document.getElementById("ul1");
+echo(ul.nodeType);		//输出 1，说明是元素节点
+echo(ul.childNodes[0].nodeType);	//输出 3，说明是文本节点，空白也算
+echo(ul.childNodes[1].nodeType);	//输出 1，说明是元素节点就是第一个li
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：DOM模型            *
+ ****************************
+ */
+</script>
+</pre>
+</body>
+</html>

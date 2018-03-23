@@ -1,0 +1,37 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象       *
+ ****************************
+ */
+/* 
+知识点一：prompt(); prompt但是本意就是提示。
+	语法格式：prompt(说明文字,默认值)
+	功能：获取用户输入文本，通过此方法与用法进行交互。
+知识点二：confirm();
+知识点三：alert();
+知识点四：setTimeout();
+知识点五：setInterval();
+*/
+echo("------------------------------prompt用法----------------------------")
+var a = prompt("请输入你的年龄",18);
+echo(a);				//如果用户点击确定，a就等于用户输入内容，如果用户点击取消a结果为null
+echo("我必须等上面一句运行结束才能运行"); //在用户没有点击取消或确定之前，程序会暂停等待用户反馈后再继续。
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

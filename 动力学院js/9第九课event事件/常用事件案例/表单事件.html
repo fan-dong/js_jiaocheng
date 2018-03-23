@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件类型-动力学院</title>
+<style type="text/css">
+legend {
+	font-size:20px;
+	padding:0px 5px;
+}
+ul li {
+	min-height:30px;
+}
+ 
+</style>
+</head>
+
+<body>
+<pre>
+三、表单事件
+	1.	change
+    	改变事件要求满足以下两个条件
+        a）当前对象属性改变是由键盘或鼠标事件激发的 
+		b）当前对象失去焦点(onblur)；
+    2.	focus
+    	onfocus 事件在对象获得焦点时发生。 
+    3.	blur
+    	onblur 事件会在对象失去焦点时发生。
+    4.	select
+    	当选择一个元素内，内容时发生
+    5.	submit
+    	当提交一个表单前发生，让我们在数据传输后台之前有个处理验证的机会
+</pre>
+<form action="" name="form1" id="form1" method="get">
+<fieldset>
+    <legend>在线留言</legend>
+    <ul>
+      <li>姓名：
+        <input type="text" value="请输入用户名" id="userName">
+      </li>
+      <li>性别：
+        <input type="radio" name="sex" id="sex1" value="男" >
+        男
+        <input type="radio" name="sex" id="sex2" value="女" >
+        女</li>
+      <li>年龄：
+        <select name="age" id="age">
+          <option value="0">--请选择您的年龄--</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </li>
+      <li>留言内容：
+        <textarea cols="50" rows="8" id="content" > </textarea>
+        <h1 id="count">输入字数统计：</h1>
+      </li>
+      <li>
+        <input type="submit" id="submit" value="确定留言">
+      </li>
+    </ul>
+  </fieldset>
+</form>
+<script type="text/javascript">
+//userName
+var userName  = document.getElementById("userName");
+var content  = document.getElementById("content");
+userName.onfocus = function(){	this.value = "";};
+userName.onchange = function(){	 
+	var val = this.value;
+	alert(val);
+	var ptn = /[a-zA-Z0-9_\u4E00-\u9FA5]{3,8}/ ;
+	if(ptn.test(val)){
+		alert("恭喜正确");
+	}
+	else{
+			alert("您输入的用户名不合法");
+			this.value="请重新输入"; 
+		}	
+};
+/*
+说明：fieldset与legend 组合使用是特殊的分组与标题。
+u4E00- u9FA5是部分常用汉字的Unicode编码范围
+*/
+
+//onselect事件案例
+content.onselect = function(){
+	alert("我被选择了");
+}
+
+//onsubmit事件案例
+form1.onsubmit = function(){
+	alert("要提交我吗？我还没后台呢");
+	return false;
+}
+
+//统计输入字数
+content.onkeyup = function(){
+	var str = content.value;
+	var c = str.length;
+	count.innerHTML = "您已经输入了："+c+"个字";
+}
+
+content.onmousedown = function(ev){
+	var ev = ev||event;
+	if(ev.button==2){
+		//alert("禁止粘贴");
+	}
+}
+ 
+</script>
+
+</body>
+</html>

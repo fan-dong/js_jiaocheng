@@ -1,0 +1,117 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：数组对象           *
+ ****************************
+ */
+/*
+知识点一：splice,交接处，拼缝处
+	splice()方法的应用情况比较多代码解释如下：
+*/
+var arr = ["PHP","S","E","O"];
+//删除格式：splice(index,n),从索引为index开始切n个下来，示例说明如下：
+echo(arr.splice(1,3)); //输出：S,E,O  
+echo(arr);			   //输出：PHP，数组中还剩下 PHP一项，其他被删除
+
+
+echo("--------splice()插入--------");
+/*
+插入格式：splice(n1,n2,element1[,element2......])
+示例说明如下：
+*/
+var arr = ["动","院"];
+arr.splice(1,0,"力","学");		//从索引为1的地方开始插入第三位及以后的所有参数
+for(p in arr){
+	echo('arr['+p+']='+arr[p]); 
+}
+/*输出如下：
+arr[0]=动
+arr[1]=力
+arr[2]=学
+arr[3]=院
+*/
+
+echo("--------splice()替换--------");
+//格式如下：splice(n1,n2,element1[,element2......])
+//索引，与个数。
+var arr = ["PHP","SEO","PS","JS"];
+arr.splice(2,1,"HTML","CSS");		//从索引为2的开始替换，替换一个其他保留
+for(p in arr){
+	echo('arr['+p+']='+arr[p]); 
+}
+/*输出如下：
+arr[0]=PHP
+arr[1]=SEO
+arr[2]=HTML
+arr[3]=CSS
+arr[4]=JS
+*/
+
+/***************************************************************************************************
+知识点二：回调函数的理解与应用,reduce:换算，折叠换算，减少
+	高级函数调用，以下函数不实用，但是能够提升函数理解和编写能力
+ 	reduce(callback[,initialValue])方法的应用代码示例：
+*/
+echo('--------------回调函数的应用--------------------');
+var arr = [1,2,3,4,5];
+var sum = arr.reduce(fnAdd);  //在函数中传入函数名称也叫回调函数
+echo(sum);
+//声明一个加法函数
+function fnAdd(pre,cur,index,array){
+	echo("pre = "+pre+" cur = "+cur+" index = "+index+" array = "+array);
+	return pre+cur;
+}
+/*
+输出
+pre = 1 cur = 2 index = 1 array = 1,2,3,4,5
+pre = 3 cur = 3 index = 2 array = 1,2,3,4,5
+pre = 6 cur = 4 index = 3 array = 1,2,3,4,5
+pre = 10 cur = 5 index = 4 array = 1,2,3,4,5
+15
+*/
+
+echo('--------------回调函数中我们写两个形式参数，reduce还是传递了4个实际参数进来--------------------');
+var arr = [1,2,3,4,5];
+var sum = arr.reduce(fnAdd2);  //在函数中传入函数名称也叫回调函数
+echo(sum);
+//声明一个加法函数
+function fnAdd2(pre,cur){
+	if(arguments[0]==1){
+		for(p in arguments){ 
+			echo("arguments["+p+"] = "+arguments[p] );
+		}
+	}     
+	return pre+cur;
+}
+/*
+说明：
+	reduce(callback[,initialValue])方法接受两个参数。
+	第一个参数为回调函数一般是必选的，第二个参数作为归并基础的初始值是可选的。
+*/
+
+echo('--------------回调函数的应用二--------------------');
+var arr = [1,2,3,4,5];
+var sum = arr.reduce(fnAdd3,15);  //在函数中传入函数名称也叫回调函数
+echo(sum);						//输出30 = 15+数组各项
+//声明一个加法函数
+function fnAdd3(pre,cur,index,array){
+	return pre+cur;
+}
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+}  
+</script>
+</pre>

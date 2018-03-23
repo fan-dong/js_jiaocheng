@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>datalist-动力学院</title>
+<style type="text/css">
+div {
+}
+ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul li {
+	height: 30px;
+	border-bottom: 1px #00CC33 dashed;
+	line-height: 30px;
+}
+ul li:hover {
+	background-color: #0C3;
+}
+ul li.focus {
+	background-color: #03C;
+}
+</style>
+<script src="jquery17.js" type="text/javascript"></script>
+</head>
+
+<body>
+<input type="text" id='stext' data-id="0" > 你可以输入“子”
+<ul id="dlist">
+ 
+</ul>
+<script type="text/javascript">
+$(function(){
+
+//假设公司有上千员工要给他们发工资-一个个查找名字比较方便
+var myData = ['动力','学院','张三','李四','王五','赵六','钱途','孙子','梅花','孟子','孔子','韩非子','道家','儒家','法家','佛家','闲云','野鹤','太极八卦','php','html','js','seo','mysql','session','jQuery'];
+
+
+//trim
+function myTrim(str){
+	var ptn = /[ 　	]/ig;
+	str = str.replace(ptn,"");
+	return str;
+}
+
+//完成搜索并返回
+function getRs(){
+	var val = $("#stext").val();
+	var rs = "";
+	if(val.length>0){
+		val = myTrim(val);
+		for(i=0;i<myData.length;i++){
+			if(myData[i].indexOf(val)>-1){
+				rs += "<li>" + myData[i] + "</li>";
+			}	
+		}
+		$("#dlist").html(rs);
+		dListLength = $("#dlist li").length;	
+	}
+}
+
+//keydown
+function myKeyDown(){
+  
+	if(temp.length<1){
+		temp = $("#stext").val();
+	}
+	k++;		
+	if(k<dListLength){	
+		$("#dlist li").eq(k).addClass("focus").siblings().removeClass("focus");
+		$("#stext").val($("#dlist li").eq(k).text());
+	}else{
+		k=-1;
+		$("#dlist li").removeClass("focus");
+		$("#stext").val(temp);
+	}
+}
+
+ 
+	
+//keyup
+function myKeyUp(){
+	k--;
+	if(k>=0){
+		$("#dlist li").eq(k).addClass("focus").siblings().removeClass("focus");
+		$("#stext").val($("#dlist li").eq(k).text());
+	}else{
+		k=-1;
+		$("#dlist li").removeClass("focus");
+		$("#stext").val(temp);
+	}
+}
+
+//鼠标点击事件
+function myMouse(){
+	$("#dlist li").click(function(e) {
+		$("#stext").val($(this).html());
+    });
+}	
+
+var k=-1,temp="";
+var dListLength=0;
+$("#stext").keyup(function(e) {	
+	//处理对应事件
+	if(e.keyCode == 40){		
+		myKeyDown();		
+	}else if(e.keyCode == 38){
+		myKeyUp();
+	}else{
+		temp="";
+		getRs();
+		myMouse();
+	}	
+});
+
+ 
+});
+
+</script>
+</body>
+</html>

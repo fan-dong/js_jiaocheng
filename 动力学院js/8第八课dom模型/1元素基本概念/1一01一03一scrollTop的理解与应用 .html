@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>scrollTop属性与onscroll事件的理解-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:5px #000 solid;
+	width:200px;
+	height:200px;
+	margin:10px;
+	line-height:50px;
+	overflow:scroll;
+	/*overflow:hidden;*/
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+  <div style="height:500px; border:15px #0C3 solid;">
+    <pre>
+  动
+  力
+  学
+  院 
+  PHP
+ </pre>
+  </div>
+</div>
+<h1 id="scrollTopVal"></h1>
+<script language="javascript">
+/*
+知识点一：scrollTop指外层元素向上凹陷的高度。
+默认值：一般默认是0，因为内层和外层元素默认是左上角对齐的，内层下面超出部分被隐藏。
+用途：因为默认情况下内部元素是靠左上角对齐的，那么如果元素逐渐向上凹陷，会产生其内部元素不停向上移动的感觉。但是要满足以下几个条件才有效果
+	1、内层元素过大把外层撑开。
+	2、外层元素写了overflow:hidden或overflow:scroll。
+	3、srcollTop + 外层元素高度 < 内层元素高度
+	因为：如果已经移动到最底端对齐时候，设置scroll不在变化
+代码解释如下：	
+*/
+oDiv = document.getElementById("box1");
+oDiv.onscroll = function(){ 
+	scrollTopVal.innerHTML = oDiv.scrollTop;
+}
+
+function topY(){ 
+	oDiv.scrollTop ++;
+	setTimeout(topY,10);
+}
+topY();
+</script>
+</body>
+</html>

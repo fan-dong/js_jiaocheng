@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // filter()方法返回的数组元素时调用的数组的一个子集。
+        a =[5,4,3,2,1];
+        samllValue = a.filter(function(x){
+            return x < 3;
+        })
+        alert(samllValue);
+
+        everyother = a.filter(function(x,i){
+            return i%2 == 0;
+        })
+        alert(everyother);
+    </script>
+</body>
+</html>

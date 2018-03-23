@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>上传模块-动力学院</title>
+<style type="text/css">
+/*
+版权声明：
+	尊重知识版权，尊重他人劳动成果，以下思路由动力学院大象老师整理，仅供参考,版权归动力学院所有，转载引用请注明出处。
+
+适用浏览器：
+	IE6以上，其中多文件上传功能只适用于支持IE10以上
+
+思路： 
+	设定上传按钮的尺寸，做一个图片或样式，把文件域定位到图片上面设置颜色为透明当点击文件域时候就相当于点击了图片感觉一样
+*/
+
+#dUpload {
+	width: 82px;
+	height: 32px;
+	position: relative;
+	overflow: hidden;
+	font-family: "microsoft yahei";
+}
+
+/*
+技巧重点：把上传文本域设置为透明色，尺寸通过调整宽高和字大小来调整
+*/
+#dFile {
+	filter: Alpha(opacity=20);
+	opacity: 0.5;
+	position: absolute;
+	right: 0px;	/*注意这个技巧*/
+	height: 32px;
+	cursor: pointer;
+	font-size: 16px;  /*注意这个技巧*/
+}
+
+/*
+上传文件的背景图
+*/
+#dFileBg {
+	width: 82px;
+	height: 32px;
+	background-color: #00a1cc;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	border-radius: 5px;
+	line-height: 30px;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<form action="upload.php" id="dForm" method="post" enctype="multipart/form-data">
+  <div id="dUpload">
+    <input type="file" multiple name="dFile[]"  id="dFile">
+    <div id="dFileBg">本地上传</div>
+  </div>
+</form>
+<script type="text/javascript">
+	var dFile = document.getElementById("dFile");
+	dFile.onchange = function(){
+		dForm.submit();
+	}
+</script>
+
+</body>
+</html>

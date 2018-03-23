@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>节点类型</title>
+<style type="text/css">
+.bordercls{ border:5px #0C3 solid;}
+.bgcls{ background:#06C;}
+</style>
+</head>
+
+<body>
+
+<pre>
+<div id="div1"> 我们的,你们的，世界的，</div>
+<div id="div2"> 欢迎来到动力学院，中华人民共和国！</div>
+<h1 id="objh1"> 动力学院 </h1>
+<script type="text/javascript">
+/*
+知识点一：文本节点
+	文本节点由Text类型表示，包含的是可以按照字面解释的纯文本内容。
+	可以是转义后的HTML字符，但是不能包含HTML代码。
+	文本节点有以下特征：
+	1. nodeType 值为3
+	2. nodeName 值为 “#text”
+	3. nodeValue 值为节点所包含的文本(别名：data属性)
+	4. parentNode 是一个Element
+	5. 不能包含子节点，文本节点是最小单元。
+	虽然文本节点不能包含子节点，却提供了很多操控文本节点的方法和属性，常用的如下。
+	1. appendData(text)			//在文本末尾追加text内容
+	2. deleteData(offset,cont)	//从offset位置开始删除，删除count个
+	3. insertData(offset,text)  //在offset指定的位置插入text内容
+	4. replaceData(offset,count,text) //用text替换从offset开始到(offset+count)为止处的文本
+	5. splitText(offset) //从offset指定的位置将当前文本节点分成两个文本节点
+	6. substringData(offset,count) //提取从从offset开始到(offset+count)为止处的文本
+	文本节点的属性：length
+	nodeValue.length或data.length中保存着文本节点中字符的数目。
+	注意事项：默认情况下每个可以包含内容的元素最多只能有一个文本节点，而且必须确实有内容存在。
+	
+*/
+echo("----------文本节点操控方法的应用------------");
+var  obj = document.getElementById("div1");
+var  obj2 = document.getElementById("div2");
+
+var objh1 = document.getElementById("objh1");
+//追加新内容
+obj.childNodes[0].appendData("中华人民共和国");
+
+//删除指定内容
+obj.childNodes[0].deleteData(4,2);
+
+//在指定位置插入指定内容
+obj.childNodes[0].insertData(4,"，insertData");
+
+//替换指定文本
+obj2.childNodes[0].replaceData(10,5,"美国的") ;
+
+//获取文本节点长度
+document.writeln(obj2.childNodes[0].nodeValue.length);
+
+//获取子节点长度 
+echo("---------获取子节点个数------------");
+document.writeln(obj2.childNodes.length);  //输出：1
+
+//分割文本节点
+obj2.childNodes[0].splitText(10) ;
+document.writeln(obj2.childNodes.length);  //输出：2
+
+//到本节为止了解了最常用的三种节点的特性，下节学习检测节点类型
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：DOM模型            *
+ ****************************
+ */
+</script>
+</pre>
+</body>
+</html>

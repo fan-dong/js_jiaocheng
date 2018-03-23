@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>sytle.top理解与应用-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:5px #000 solid;
+	width:200px;
+	height:200px;
+	margin:20px;
+	position:absolute; /*必须是absolute，style.top设置才能看到变化*/
+}
+ 
+#box2 {
+	position:absolute;
+	top:10px;
+	width:50px;
+	height:50px;
+	border:5px #0C3 solid;
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+  <div id="box2"> 动力学院 </div>
+</div>
+<script language="javascript">
+oDiv = document.getElementById("box1");
+oDiv2 = document.getElementById("box2");
+oDiv2.style.top ="100px"; 
+/*
+知识点一：style.top的用途的理解
+说明：以上例子就是让div2相对于div1向下偏移100像素。
+注意：单位px不能省略，必须配合绝对定位元素才有意义.
+功能：style.top是用来设置元素的绝对定位时距参考物上边的高度。
+
+知识点二：如何获取一个元素的绝对定位偏移值呢？ 
+		topVal = oDiv2.style.top;
+		alert(oDiv2.style.top);  
+*/
+</script>
+</body>
+</html>

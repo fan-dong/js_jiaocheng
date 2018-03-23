@@ -1,0 +1,37 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：流程控制语句       *
+ ****************************
+ */
+/*
+语法格式：
+	for(property in expression){
+		statement;
+	}
+功能：只前的循环都有特点，就是对要循环的内容都是已知的，有时候无法预知对象的任何信息，更谈不上使用循环次数。
+for...in就是为解决这个问题而生，主要被用来枚举对象的属性。 
+代码示例：
+*/
+ 
+for(property in window){
+  echo(property);  //输出window对象的所有属性
+} 
+ 
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

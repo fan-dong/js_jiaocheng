@@ -1,0 +1,138 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：流程控制语句       *
+ ****************************
+ */
+/*
+一：if else语句
+语法格式一：
+	if(条件){ 语句块一 } 
+	[else{ 语句块二 }]
+语法格式二：（不推荐）
+	if(条件) 语句一;	
+	[else	语句二;]
+
+说明一：格式一中的条件如果是真就执行语句块一(系统会自动调用Boolean对条件进行转换)，如果为假就执行语句块二，在中括号中的语句块二的意思是可有可无。如果没有else语句那么条件为假什么都不做。
+
+说明二：格式二与格式一比少了个大括号，当if满足条件时候就执行一条语句而不是一组语句的时候可以省略大括号。执行方式与格式一相同
+
+代码示例如下：
+*/ 
+var a = true;  //可用true|false对比输出
+if(a){
+	echo("a的结果为真会执行这个大括号中的所有语句");
+	echo("a为真就是这样");
+}
+else{
+	echo("a的结果为假会执行这个大括号中的所有语句");		
+	echo("a为非真就是这样");
+}	
+	
+//格式二：
+echo('-----请认真对比格式二与一的区别-----')
+var a = true;  //可用true|false对比输出
+if(a)	
+	echo("a为真我输出，a为假我无法执行");
+	echo("a真假和我没关系，他只能影响上一句，我总是会输出");
+//规定：如果没有大括号if只能影响最近的一条语句。else同理
+
+
+/* 
+switch语句*********************************************
+语法格式：
+	switch(value){
+		case value1 : statement1;
+			break;
+		case value2 : statement2;
+			break;
+		...
+		...	
+		default: statement;	
+	}
+说明：系统自动用value值与value1,value2...进行比较如果等于哪一个就执行哪一个statement
+如果所有对比完毕都不想等，执行default中的语句。
+案例解释如下：	
+*/
+var age = 20;
+switch(age){
+	case 10: 
+		echo('小孩子');
+		break;
+	case 20:
+		echo('小帅哥');
+		break;
+	case 30:
+		echo('大帅哥');
+		break;
+	case 40:
+		echo('中年人');
+		break;
+	case 50:
+		echo('中老年人');
+		break;
+	default:
+		echo('年龄是'+age+'岁');
+} 
+//如果没有break是什么情况呢？请同学们自己测试感悟！
+//如果10岁到15岁都想执行小孩的情况怎么办呢？ 
+//案例一：合并两个值的写法
+var age = 13;
+switch(age){
+	case 10: 
+	case 11:
+	case 12: 
+	case 13:
+	case 14: 
+	case 15: 
+		echo('小孩子-合并多种情况写法一');
+		break;
+	case age<20:
+		echo('小帅哥');
+		break;
+	default:
+		echo('年龄是'+age+'岁');
+} 
+
+
+//案例二：case中不仅仅可以是具体值，还可以是表达式，极大提高控制灵活性
+var age = 40;
+switch(true){
+	case age<15 : 
+		echo('小孩子');
+		break;
+	case age<20:
+		echo('小帅哥');
+		break;
+	case 30<age&&age<50:
+		echo('中年人');
+		break;
+	default:
+		echo('年龄是'+age+'岁');
+} //比较运算的结果不是true就是false总有与true相等的，如果都不等还是default的
+
+
+
+
+/* 
+if else练习作业，请判断学生成绩状况，如果
+成绩高于60分输出及格，
+成绩高于80分输出良好
+成绩高于90分输出优秀
+否则：输出不及格
+*/
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

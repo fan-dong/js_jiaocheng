@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>scrollTop属性的理解-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:5px #000 solid;
+	width:300px;
+	height:300px;
+	margin:20px 5px;
+	line-height:50px;
+	position:relative;
+	padding-top:10px;
+ 
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+  <div id="box2" style="height:100px; margin-top:20px; border:15px #0C3 solid; float:left;">
+ 
+  动
+  力
+  学
+  院 
+  PHP
+ 
+  </div>
+</div>
+<h1 id="scrollTopVal"></h1>
+<script language="javascript">
+/*
+知识点一：offsetTop是指元素相对于其参考的父元素向下偏移的距离。
+	1、在非绝对定位的元素中默认参考物是浏览器上边缘。
+	2、对于绝对定位的元素就是其相对于父元素顶部的距离。
+*/
+var str = "box1距离父容器的高度=" +box1.offsetTop + "\n box2距离父容器的偏移高度=" +box2.offsetTop;
+document.writeln(str); 	//结果都是：20,30 ，也就元素与其参考元素上边边缘的距离。
+
+//思考练习题：请在非绝对定位元素中测试下 offsetTop的用法，并至少独立练习3中不同元素。 
+ 
+</script>
+</body>
+</html>

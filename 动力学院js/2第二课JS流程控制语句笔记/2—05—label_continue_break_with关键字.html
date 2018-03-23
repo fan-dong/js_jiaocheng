@@ -1,0 +1,150 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：流程控制语句       *
+ ****************************
+ */
+ /*
+知识点一：break与continue语句
+	break与continue语句用于在循环体重精确的控制代码的执行，其中break语句立即退出循环，执行循环后的其他语句。
+	continue语句是立即退出本次循环，下次满足条件会从循环的顶部继续执行。
+案例解释：
+*/
+//break结束整个循环
+for(var i=1;i<10;i++){
+	if(i%2==0){
+		break;	 //当i=2时候退出整个循环
+	}
+	else{
+		echo(i);	//输出1
+	} 
+}
+//continue 结束本次循环继续下一次循环，输出所有奇数
+for(var i=1;i<10;i++){
+	if(i%2==0){
+		continue;	 //当i是2的倍数时候结束本次循环，继续下一次
+	}
+	else{
+		echo(i);	//输出1,3,5,7,9
+	} 
+//注意：i++	是在循环结束之前的最后一句执行
+}
+
+//理解i++	是在循环结束之前的最后一句执行的特性
+for(var i=1;i<10;){
+	if(i%2==0){
+		i++ //遇到跳出循环的continue与break会在这里执行，也就是在循环结束之前一定要执行for中的第三个参数
+		continue;	 
+	}
+	else{
+		echo(i);	 
+		i++ //如果没有continue和break循环 i++写到上面括号中和写到这里一样
+	} 
+	
+}
+
+ 
+ 
+/*
+知识点二：label语句语法格式如下
+	label:satement
+广泛应用于：标签常常配合break与contine用在循环嵌套等复合结构中。
+案例解释：
+*/
+echo('---------画蛇添足的应用标签---------');
+start:for(var i=1;i<10;i++){
+  if(i%2==0) continue start;
+  else echo(i);
+}
+
+echo('---------break配合label的常见用法---------');
+var num = 0;
+outlabel:
+for(i=1;i<10;i++){
+	for(j=1;j<10;j++){
+		if(j%2==0){
+			 break ;  //break是跳出内层循环，不能跳出外层循环
+			 //break outlabel;	//能够跳出内外层整个循环，同学们可以把这两个交替注释查看num结果去领会。
+		}
+	}
+	num++;
+} 
+echo(num);
+ 
+echo('---------continue配合label的常见用法---------');
+var num = 0;
+outlabel:
+for(i=1;i<10;i++){
+	for(j=1;j<10;j++){
+		if(j%2==0){
+			 continue ;  //continue是跳出内层循环，不能跳出外层循环
+			 continue outlabel;	//能够跳出内外层整个循环,如果两句都写，下面一句无效，请你思考是为什么？
+		}
+	}
+	num++;
+} 
+echo(num);
+ 
+/*
+知识点三：width语句语法格式
+	with(expression) statement;
+说明：with语句的作用是将代码的作用域设置到一个特定的对象中，使用此语句的目的是简化书写格式，在严格模式下
+不允许使用此语句，大量使用with会导致性能下降，在实际应用中不推荐使用，了解即可。
+代码示例：
+*/
+//定义一个对象
+var oPerson = {
+	'name':'张三',
+	'age':29,
+	'sex':'男',
+}
+//没有使用with必须这样输出
+echo (oPerson.name); //输出 张三	
+echo (oPerson.age); //输出 29
+echo (oPerson.sex); //输出 男	
+//使用with之后可以这样输出
+with(oPerson){
+	echo (name); //输出 张三	
+	echo (age); //输出 29
+	echo (sex); //输出 男	
+}
+echo('----拓展以上代码并思考----');
+name = '我不是Person对象的名字';
+myName  = '我的名字叫李四';
+
+with(oPerson){
+	echo (name); //输出 张三	
+	echo (age); //输出 29
+	echo (sex); //输出 男	
+	echo (myName); //输出 我的名字叫李四
+}
+/*
+解释：with语句中的属性首先会被认为是oPerson对象的，如果没有找到会向上一级window对象中进行寻找。
+
+名词了解：严格模式
+	ECMAScript5开始引入严格模式概念，严格模式为Javascript定义了一种不同的解析与执行模型，在严格模式下
+	ECMAScript3中的一些不确定行为得到处理，对某些不安全的操作也会抛出错误，要在整个脚本中启用严格模式
+	只需在代码顶部添加一个编译指示符： "use strict"; 也可以指定部分在严格模式下执行，例如在函数内部包含
+	这个指示符可以指定函数在严格模式下执行。
+	function fnDL(){
+		"use strict";
+		//代码块
+	}	
+支持严格模式的有：IE10+, Chrome, Firefox 4+	等新版本浏览器
+*/
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

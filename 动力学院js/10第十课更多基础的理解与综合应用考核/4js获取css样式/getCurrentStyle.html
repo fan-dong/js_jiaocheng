@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>style,currentStyle,document.defaultView.getComputedStyle应用 - 动力学院</title>
+<style type="text/css">
+#box2{width:100px; height:50px; background-color:#0F0; }
+#box3{width:200px; height:50px; background-color:#00F; }
+#box4{width:200px; height:50px; background-color:#00F; }
+#box4:after{ width:200px; position:absolute; top:250px; height:300px; content:"动力学院"; display:block; font-size:40px;}
+</style>
+</head>
+
+<body>
+<div id="box1" style="width:50px; height:50px; background-color:#F00;"></div>
+<script type="text/javascript">
+var box1 = document.getElementById("box1");
+document.writeln(box1.style.width);  //输出：50px
+box1.style.width = "100px";			 //修改
+document.writeln(box1.style.width);  //输出：100px
+</script>
+<!-------- 代码示例二：IE系列专用currentStyle------------------------------>
+<div id="box2"></div>
+<script type="text/javascript">
+var box2 = document.getElementById("box2");
+//box2.currentStyle.width = "200px"; 不能设置，currentStyle是只读，设置可以用style
+document.writeln( box2.currentStyle.width);   		//IE下可以得到 100px 
+//alert(box2.style.width);//外部样式这样无法获取
+</script>
+<!-------- 代码示例三：以下标准方法IE11谷歌火狐等新版支持HTML5标准的浏览器支持----->
+<div id="box3"></div>
+<script type="text/javascript">
+var box3 = document.getElementById("box3");
+var objStyle = document.defaultView.getComputedStyle(box3,null);
+document.writeln( objStyle.width);   		//输出：200px
+</script>
+
+<!-------- 代码示例四：pseudoElement伪元素，伪元素就是通过css动态添加的一个行内元素。----->
+<div id="box4"></div>
+<script type="text/javascript">
+var box4 = document.getElementById("box4");
+var pseudoStyle = document.defaultView.getComputedStyle(box4,":after");
+document.writeln( pseudoStyle.height);   		//输出：300px
+</script> 
+
+<script type="text/javascript">
+//兼容IE与火狐等获取外部CSS样式对象的写法：
+function CurrentStyle(element){
+	return element.currentStyle || document.defaultView.getComputedStyle(element, null);
+}
+</script>
+<!--
+知识点一：obj.style
+	可以获取或修改行内样式（写在html标签中的（style="…"）这个），而无法获取非行内css。
+    以下两个方法用来获取非行级CSS，不能获取行级样式。
+
+知识点二：obj.currentStyle
+	IE中使用的是obj.currentStyle方法。返回CSS样式的只读对象，在非IE下不存在。
+    
+知识点三：document.defaultView.getComputedStyle(element,pseudoElement)
+	"DOM2级样式"标准规范提供了document.defaultView.getComputedStyle(element,pseudoElement)方法。
+    getComputedStyle方法返回一个CSSStyleDeclaration对象，其中包含当前元素的所有计算的样式。  
+	这个方法接受两个参数：
+    参数一：要取得计算样式的元素。
+    参数二：一个伪元素字符串（例如":after"后面会学习）。pseudo 伪元素，伪装的意思。
+	说明：如果不需要伪元素信息，第二个参数可以是null，一般都是null。	
+-->
+</body>
+</html>

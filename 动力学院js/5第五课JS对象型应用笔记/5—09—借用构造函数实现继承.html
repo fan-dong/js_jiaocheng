@@ -1,0 +1,57 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：借用构造函数
+说明：借用构造函数是指在子类的构造函数中调用超类的构造函数。
+*/
+function  A(){
+	this.name = "A类";
+	this.like = ["打球","游泳"];
+	A.prototype.say = function(){
+	echo("A类的原型方法");
+}
+
+}
+
+function B(){
+	this.age = 18;
+	A.call(this);		 //仅仅是调用构造函数把构造函数中this部分绑定到当前对象的this上
+}
+
+var b= new B();
+echo(b.name);		//输出：A类
+//	b.say();		无法访问
+
+/*
+知识点二：借用构造函数的问题
+	1、如果方法都在构造函数中定义，就失去了复用的功能。
+	2、方法如果写在父类的原型中，子类无法访问到。
+为了解决以上问题有了组合式继承，下一节 组合式继承	
+*/
+
+
+
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

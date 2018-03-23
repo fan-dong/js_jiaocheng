@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>鼠标跟随-动力学院</title>
+<style type="text/css">
+div {
+	width:50px;
+	height:50px;
+	background-color:#0C3;
+	position:absolute;
+}
+</style>
+</head>
+
+<body>
+<div id="mydiv"></div>
+<script type="text/javascript">
+var mydiv =document.getElementById("mydiv");
+document.documentElement.onmousemove = function(ev){
+	var ev = ev ||event;
+	mydiv.style.left = ev.clientX-25 + "px";
+	mydiv.style.top =  ev.clientY-25 + "px";
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象       *
+ ****************************
+ */
+/*
+Math对象也就是数学计算常用的内容，Math是数学的意思。
+数学运算除了加减乘除外还有很多复杂的数学运算，比如常见的平方，立方，绝对值等。
+常用方法如下：
+	Math.ceil(x)		//取最近的最大整数返回
+	Math.floor(x)		//取最近的最小整数返回
+	Math.random()		//返回0-1之间的随机数不包含0-1
+	Math.max(x,y)		//返回一组数中最大的一个，个数不限
+	Math.min(x,y)		//返回一组数字最小的一个，个数不限
+	Math.round(x)		//四舍五入
+	Math.abs(x)			//返回x的绝对值
+	Math.pow(x,y)		//返回x的y次方
+	Math.sin(x)			//返回x的正弦值
+	Math.cos(x)			//返回x的余弦值
+	Math.tan(x)			//返回x的正切值
+	Math.acos(x)		//返回x的反余弦
+	.....等等，不一一举例同学们可以通过输入Math.看弹出内容。不懂的概念请翻阅数学书籍了解相关知识。
+*/
+//代码示例
+echo('---------Math类的ceil()、floor()、round()用法------------')
+echo("负数" + Math.ceil(-8.6)+" 正数 "+ Math.ceil(8.6));	//输出：-8,9 向上舍入
+echo("负数" + Math.floor(-8.6)+" 正数 "+ Math.floor(8.6));  //输出：-9,8 向下舍入
+echo("负数" + Math.round(-8.6)+" 正数 "+ Math.round(8.6));  //输出：-9,9 四舍五入
+
+echo('---------Math类random()用法------------') 
+//获取1-100之间的随机数
+var a = Math.floor(Math.random()*100+1);
+echo(a);
+
+//请思考如何获取0到100这101个随机数呢？
+
+echo(Math.pow(2,3));//输出：2的3次方，8
+
+echo(Math.abs(-10)); //输出：10
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

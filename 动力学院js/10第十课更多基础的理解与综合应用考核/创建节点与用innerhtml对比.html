@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>鼠标跟随-动力学院</title>
+<style type="text/css">
+div {
+	width:500px;
+	height:300px;
+	 
+	position:absolute;
+}
+span{ width:2px; height:2px; background-color:#ff0000; display:inline-block;
+float:left;}
+</style>
+</head>
+
+<body>
+<h1 id="h1">时间：</h1>
+<div id="mydiv"></div>
+<script type="text/javascript">
+
+var mydiv = document.getElementById("mydiv");
+var h1 = document.getElementById("h1");
+var i =0;
+var t1 = (new Date()).getTime();
+var str = "";
+for(;i<2000;i++){
+	str += "<span><b>动</b></span>" ;
+}
+mydiv.innerHTML = str;	
+ 
+var t2 = (new Date()).getTime();
+h1.innerHTML = t2-t1;   // 平均值：50左右  ， 谷歌30左右
+ 
+
+/* 
+var mydiv = document.getElementById("mydiv");
+var h1 = document.getElementById("h1");
+var i =0;
+var t = new Date();
+var t1 = t.getTime();
+
+for(;i<2000;i++){
+	var span =document.createElement("span");
+	var txt = document.createTextNode("动");
+	span.appendChild(txt);
+	mydiv.appendChild(span);
+}
+	
+ 
+var t3 = new Date();
+var t2 = t3.getTime();
+h1.innerHTML = t2-t1;   // 平均值：900左右  谷歌30左右
+*/
+</script>
+</body>
+</html>

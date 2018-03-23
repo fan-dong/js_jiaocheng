@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>JS实现倒计时(时、分，秒)-动力学院</title>
+<script language="javascript" type="text/javascript"> 
+function fnDateDiff(year,month,day,showDateDiff){ 
+	var now = new Date(); 
+	var endDate = new Date(year, month-1, day); 
+	var leftTime = endDate.getTime()-now.getTime(); 
+	var leftsecond = parseInt(leftTime/1000); 
+	var day1 = Math.floor(leftsecond/(60*60*24)); 
+	var hour = Math.floor((leftsecond-day1*24*60*60)/3600); 
+	var minute = Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+	var second = Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+	var show = document.getElementById(showDateDiff); 
+	show.innerHTML = "距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒"; 
+} 
+window.onload = function(){
+	setInterval(function(){fnDateDiff(2020,12,31,'showDateDiff');},1000); 
+}
+</script>
+</head>
+<body>
+<div id="showDateDiff"></div>
+</body>
+</html>

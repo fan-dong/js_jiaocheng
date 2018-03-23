@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>同时按下两个键-动力学院</title>
+<style type="text/css">
+div {
+	width:50px;
+	height:50px;
+	background-color:#0C3;
+	position:absolute;
+}
+</style>
+</head>
+
+<body>
+ 
+<script type="text/javascript">
+
+/*
+//这样代码无法 ev.keyCode==66 && ev.keyCode == 65
+document.documentElement.onkeydown = function(ev){
+	var ev = event || ev;
+	if(ev.keyCode==66 && ev.keyCode == 65){
+		  alert("您按下了 ctrl+a");
+	}
+}
+*/
+
+//JS不能同时获取两个按键键码，但是给了一个判断
+//js组合键 顺序：先按ctrl键，然后按字母键盘才有效。
+
+/*
+document.documentElement.onkeydown = function(ev){
+	var ev = event || ev;
+	if(ev.ctrlKey && ev.keyCode == 65){
+		  alert("您按下了 ctrl+a");
+	}
+}
+*/
+</script>
+</body>
+</html>

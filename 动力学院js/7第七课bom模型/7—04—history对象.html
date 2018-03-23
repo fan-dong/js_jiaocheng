@@ -1,0 +1,63 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：BOM模型            *
+ ****************************
+ */
+/*
+知识点一：history对象 
+History对象包含用户在浏览器窗口中访问过的URL.History对象没有准确的标准。
+我们只了解常用的几个方法即可。
+1、back()方法，返回列表中的前一个url
+2、forward() ,加载history列表中的下一个URL
+3、go() 加载history列表中的某个具体页面。
+用法分别如下：
+	//后退一步
+	history.back()
+	history.go(-1); 
+	//后退指定步数
+	history.go(-2);
+	//前进一步
+	history.forward()
+	history.go(1);
+
+*/
+for(p in history){
+document.writeln("["+p+"] = "+ history[p]);
+}
+/*
+输出：
+[length] = 1
+	
+[state] = null
+	
+[back] = 
+function back() {
+    [native code]
+}
+
+[forward] = 
+function forward() {
+    [native code]
+}
+[go] = 
+function go() {
+    [native code]
+}
+[pushState] = 
+function pushState() {
+    [native code]
+}
+[replaceState] = 
+function replaceState() {
+    [native code]
+}
+
+*/
+
+
+</script>
+</pre>

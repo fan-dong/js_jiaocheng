@@ -1,0 +1,86 @@
+<pre style="line-height:24px;">
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：数组对象           *
+ ****************************
+ */
+/*
+知识点一：动态给数组对象添加和删除元素	
+*/	 
+//示例一动态创建索引型二维数组并为其添加元素,实现九九乘法表
+var aA = [];
+for(var i=1;i<10;i++){
+	aA[i] = [];	 //这里给一维数组aA中的元素进行赋值，值为一个一维数组，赋值后aA就变成了二维数组
+	for(var j=1;j<=i;j++){
+		aA[i][j] = i*j  + "   ";		//最后加个空格是为了输出的美观提前准备
+	}
+}
+//二维索引数组的访问
+for(var i=1;i<10;i++){
+	for(var j=1;j<=i;j++){
+		if(j>1 && aA[i][j]<10) {	document.write("aA["+i+"]["+j+"]= 0"+aA[i][j]);}
+		else{	document.write("aA["+i+"]["+j+"]= " + aA[i][j]);	}
+	}
+	document.write("<br>");
+}
+
+
+
+/**********************************************************************************
+知识点二：动态创建关联型二维数组,实现九九乘法表
+*/
+
+var aB = [];
+var ascii = 96;
+var t = t2 = "字母";  
+document.writeln("-----------关联型数组----------------");
+for(var i=1;i<10;i++){
+	t = String.fromCharCode(ascii+i);
+	aB[t] = [];
+	for(j=1;j<=i;j++){
+		t2 =  String.fromCharCode(ascii+j);
+		if(j>1 && aA[i][j]<10){ aB[t][t2] = "0"+ i*j + "    "; }
+		else {	aB[t][t2] = i*j + "    ";	}
+	}
+}
+
+//关联型二维数组访问方法
+for(var i=1;i<10;i++){
+	t = String.fromCharCode(ascii+i);
+	for(j=1;j<=i;j++){
+		t2 =  String.fromCharCode(ascii+j);
+		document.write("aB["+t+"]["+t2+"] = " + aB[t][t2]);
+	}
+	document.write("<br>");
+}
+
+
+document.writeln(charAt("A"));
+
+
+/*
+说明： String.fromCharCode(ASCII码值);  能够获取ASCII码值对应的字母。
+例如： document.write(String.fromCharCode(65));  //输出A  因为A的ASCII码是65 
+与之对应的是：字母.charCodeAt() 方法能够返回一个字母的ASCII码值
+例如：document.write("A".charCodeAt()) ; // 可以输出 65
+*/
+/*
+关于：charCodeAt()与String.fromCHarCode()的拓展学习案例
+
+案例：以下两行代码输出什么？
+var str2 =String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 21160, 21147, 23398, 38498, 39, 41);
+eval(str2); 
+//说明：eval可以把符合JS语法的字符串变成具体语法。例如 eval("alert('OK')"),就相当于 alert('OK')
+
+//以下代码输出什么？
+var str = "alert('动力学院')"; 
+for(var i=0;i<str.length;i++){
+	document.writeln(str.charCodeAt(i)+",");
+}
+*/
+ 
+</script>
+</pre>

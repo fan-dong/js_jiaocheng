@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件监听-动力学院</title>
+<style type="text/css">
+#box {
+	width:500px;
+	height:300px;
+	background-color:#CCC;
+	position:relative;
+}
+#box1 {
+	width:300px;
+	height:150px;
+	background-color:#0C3;
+	position:absolute;
+}
+#box2 {
+	width:200px;
+	height:200px;
+	background-color:#09C;
+	position:absolute;
+}
+#box3 {
+	width:100px;
+	height:50px;
+	background-color:#FF0;
+	position:absolute;
+}
+</style>
+</head>
+
+<body>
+<div id="box" onClick="alert('同志们好！')">
+  <div id="box1" onClick="alert('首长好！')"></div>
+  <div id="box2" onClick="notice();"></div>
+  <div id="box3" onClick="service('为人们服务');"></div>
+</div>
+<pre>
+<script language="javascript">
+function notice(){ alert("同志们辛苦了");} 
+function service(str){ alert(str);} 
+/*
+说明：以上把事件监听功能onClick写到div中的形式是最古老原始形式，所有主流浏览器都支持。
+类似行内CSS样式一样，是有效的(注意大小敏感),但是缺点和写到行内的CSS样式一样。
+缺点如下：
+	1、复用性不好。
+	2、JS与HTML夹杂到一块，代码混乱，发生错误难以检测和排除，不利于分工合作。
+	3、如果发生修改需要同时修改HTML和JS，改动相对困难。
+为了解决以上问题把事件监听形式改进如下，以下方式也是目前主流的使用方式之一。
+下一节：事件监听二	
+*/
+</script>
+</pre>
+</body>
+</html>

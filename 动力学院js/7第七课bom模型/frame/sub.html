@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>frame动力学院</title>
+</head>
+
+<body>
+<!--
+知识点二：子框架获取父框架内容的方法：window.parent 
+-->
+<div id="subbox">我是SUB</div>
+<script type="text/javascript">
+var pdoc = window.parent;
+var pTxt = pdoc.document.body.innerHTML;
+alert(pTxt);
+</script>
+<!--
+自学思考题：window.parent和window.opener的区别
+-->
+</body>
+</html>

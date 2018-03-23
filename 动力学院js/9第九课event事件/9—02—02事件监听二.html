@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件监听二 - 动力学院</title>
+<style type="text/css">
+#box {
+	width:500px;
+	height:300px;
+	background-color:#CCC;
+	position:relative;
+}
+#box1 {
+	width:300px;
+	height:150px;
+	background-color:#0C3;
+	position:absolute;
+}
+#box2 {
+	width:200px;
+	height:200px;
+	background-color:#09C;
+	position:absolute;
+}
+#box3 {
+	width:100px;
+	height:50px;
+	background-color:#FF0;
+	position:absolute;
+}
+</style>
+</head>
+
+<body>
+<div id="box">
+  <div id="box1"></div>
+  <div id="box2"></div>
+  <div id="box3"></div>
+</div>
+<pre>
+<script language="javascript">
+var box = document.getElementById("box");
+ 
+box.onclick = function(){
+	alert("同志们好！1111");
+};
+//通过节点形式访问对象，也可以通过id或tagName
+box.childNodes[1].onclick=function(){
+	alert("同志们辛苦了222");
+}
+//通过tagName访问对象
+var box2 = document.getElementsByTagName("div");
+box2[2].style.border = "5px solid #ff0000";
+box2[2].onclick = function(){ alert("改变颜色，这里是box2上的事件");} 
+
+/*
+说明：通过以上形式可以把事件与HTML完全分离，是最常用的形式之一。
+以上对于一般项目已经足够用，大家必须精通。如果想单击一次执行多个函数怎么办？
+可以用如下方式：
+*/
+box.onclick = function(){
+	fnA();
+	fnB();
+};
+function fnA(){
+	alert("fnA");
+} 
+function fnB(){alert("fnB");}
+/*
+说明：这种情况下alert("同志们好！1111");刚开始定义的函数就被覆盖了
+下一节 更新版本的事件监听函数
+*/
+</script>
+</pre>
+</body>
+</html>

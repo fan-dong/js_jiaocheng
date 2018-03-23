@@ -1,0 +1,269 @@
+<script type="text/javascript">
+/*
+知识点一：基本模式创建对象
+var p1 = {
+	   name:"张三",
+	   age:18
+	};
+
+var p2 = {
+		name:"李四",
+		age:28
+	};	
+*/
+/*
+知识点二：工厂模式,工厂模式缺点，无法判断对象属于哪个类型 
+function  P(name,age){
+	var o = {};
+	o.name = name;
+	o.age = age;
+	return o;	
+ }
+var p1 = P("张三",18);
+var p2 = P("李四",28) ;
+document.writeln(p1 instanceof  P) ;
+*/
+
+/*
+知识点三：借用构造函数模式创建对象
+function P(name){
+	this.name = name;
+	this.say = function(){
+					alert(this.name);
+				}
+}
+var p1 = new P("张三");
+var p2 = new P("李四");
+document.writeln(p2.say == p1.say);
+//构造函数的缺点，方法不能被重复利用。
+//构造函数的原理是复制所有内容成一份副本。浪费内存空间。
+*/
+
+
+/*
+知识点四：原型式创建对象
+
+function P(){}
+P.prototype.name = "张三";
+P.prototype.say = function(){alert(this.name);}
+P.prototype.like = ["打球","下期"];
+
+var p1 = new P();
+var p2 = new P();
+//document.writeln(p1.say == p2.say);  原型的优点能够共享
+p1.like.push("弹琴");
+document.write(p2.like);  //输出：p2也爱弹钢琴，我们并没说p2喜欢谭钢琴
+//原型式创建对象的缺点：对于引用的对象性。
+//例如数组会产生问题（不能产生差异性
+*/
+
+/*
+知识点五：组合式创建对象，充分利用原型与构造函数的优点。
+把属性等可能有差异性的全部放到构造函数中，对于通用的方法放到原型中。
+以下方法是通用的，创建对象的最佳组合。 
+function  P(name){
+	this.name = name;
+	this.like = ["打球"];
+}
+P.prototype.say = function(){
+						alert(this.name);
+					}
+*/
+
+/******************以上是创建对象的方法*********************************/
+
+/*
+知识点一：借用构造函数的继承
+function A(){
+	this.money = "100亿";
+}
+function B(){
+	this.food = "食物";
+	A.call(this);
+}
+var c = new B();
+document.writeln(c.money);
+*/
+/*
+知识点二：借用构造函数实现继承的问题
+不能够继承来自父类的原型中的内容
+function A(){
+	this.money = "100亿";
+}
+A.prototype.right =  "挪用公款";
+function B(){
+	this.food = "食物";
+	A.call(this);
+}
+var c = new B();
+document.writeln(c.right);
+*/
+
+/*
+知识点三：原式继承
+function A(){
+	this.money = "100亿";
+}
+A.prototype.right =  "挪用公款";
+function B(){
+	this.food = "食物";
+}
+B.prototype = new A();
+var c = new B();
+document.writeln(c.right);
+*/
+
+/*
+知识点四：原型式继承的问题
+不能个性化。
+function A(){
+	this.money = "100亿";
+	this.like = ["游泳"];
+}
+A.prototype.right =  "挪用公款";
+function B(){
+	this.food = "食物";
+}
+B.prototype = new A();
+var c = new B();
+var c2 = new B();     //c2不喜欢唱歌
+c.like.push("唱歌");
+document.writeln(c.like);
+*/
+
+/*
+知识点五：组合式继承（借用构造函数与原型式组合）
+function A(){
+	this.money = "100亿";
+	this.like = ["游泳"];
+}
+A.prototype.right =  "挪用公款";
+function B(){
+	this.food = "食物";
+	A.call(this)
+}
+B.prototype = A.prototype;
+var c = new B();
+var c2 = new B();     //c2不喜欢唱歌
+c.like.push("唱歌");
+document.writeln(c.like);
+*/
+
+/*
+知识点五种的组合式继承的问题
+function A(){
+	this.money = "100亿";
+	this.like = ["游泳"];
+}
+A.prototype.right =  "挪用公款";
+
+
+function B(){
+	this.food = "食物";
+	A.call(this)
+}
+B.prototype = A.prototype;
+//这种直接赋值的问题：给B添加东西导致A的原型发生变化
+B.prototype.b2 = "B特有的属性" ;
+
+var c = new B();
+var c2 = new B();     //c2不喜欢唱歌
+
+var a = new A();
+document.writeln(a.b2);
+*/
+
+/*
+知识点六：组合式继承范式二
+为了解决原型原型被共享的问题，得出以下改进代码。
+function A(){
+	this.money = "100亿";
+	this.like = ["游泳"];
+	//一千行代码
+}
+A.prototype.right =  "挪用公款";
+
+
+function B(){
+	this.food = "食物";
+	A.call(this);  //第二次调用A这个函数
+}
+B.prototype = new A();   //第一次调用A这个函数
+//这种直接赋值的问题：给B添加东西导致A的原型发生变化
+B.prototype.b2 = "B特有的属性" ;
+var c = new B(); 
+*/
+
+
+/*
+知识点七：借用空构造函数的组合式继承范式三
+最佳经典继承范式
+function A(){
+	this.money = "100亿";
+	this.like = ["游泳"];
+	//一千行代码
+}
+A.prototype.right =  "挪用公款";
+
+
+function T(){}
+T.prototype = A.prototype;
+
+
+function B(){
+	this.food = "食物";
+	A.call(this);  		//第一次调用A这个函数
+}
+B.prototype = new T();   //改调用T这个函数
+B.prototype.constructor = B;
+B.prototype.b2 = "B特有的属性" ;
+var c = new B(); 
+*/
+
+/*
+知识点八：复制继承
+解决如何让一个对象继承另外一个独立对象问题。
+*/
+
+var P = {
+	name:"张三",
+	like:["打球","唱歌"],
+	company:{
+			money:"100亿",
+			right:"董事长"
+		}
+}
+
+var p1 = {
+		name:"李四"
+	}
+
+deepCopy(P, p1);
+document.writeln(p1.like);
+/* */
+function deepCopy(p, c) { 
+
+　　　　var c = c || {};
+
+　　　　for (var i in p) { 
+
+　　　　　　if (typeof p[i] === 'object') { 
+
+　　　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+
+　　　　　　　　deepCopy(p[i], c[i]);
+
+　　　　　　} else {
+		
+　　　　　　　　　c[i] = p[i];
+
+　　　　　　}
+　　　　}
+
+　　 　return c;
+　　}
+/*
+作业题目：让p1继承P中所有属性，name属性除外
+*/
+
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>scrollTop属性与onscroll事件的理解-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+#box1 {
+	border:20px #000 solid;
+	width:200px;
+	height:200px;
+	margin:20px 5px;
+	line-height:50px;
+	padding:50px 10px 0px 10px;
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+  <div id="box2" style="height:300px; margin:10px 0px;   border:15px #0C3 solid;  "> 动
+    力
+    学
+    院 
+    PHP </div>
+</div>
+<h1 id="scrollTopVal"></h1>
+<script language="javascript">
+/*
+知识点一：scrollHeight 不同浏览器差距比较大，兼容性极差，了解即可。
+	新版浏览器基本认为：
+	1、如果内层元素高度超过外层的话是从外层元素的上边的内边缘到内层元素的下边的外边缘的距离。
+	2、如果内层元素没有超高那么就是外层元素的边框内的高度。 
+*/
+scrollTopVal.innerHTML =  box1.scrollHeight ;
+ 
+</script>
+</body>
+</html>

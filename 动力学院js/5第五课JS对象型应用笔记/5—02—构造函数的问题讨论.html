@@ -1,0 +1,62 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*接上文构造函数的问题讨论
+为了解决资源浪费问题吧构造函数代码改进如下：
+*/
+
+function Person(name,age){
+	this.name = name;
+	this.age = age;
+	this.Say = Say;			/*把方法转移到对象外，这里保留指向方法的指针*/
+}
+
+function  Say(){
+	echo(this.name+"说：公用方法节约资源！");
+}
+
+var p1 = new Person("张三",22);
+var p2 = new Person("李四",18);
+p1.Say();			//输出： 张三说：公用方法节约资源！
+p2.Say();			//输出： 李四说：公用方法节约资源！
+echo(p1.Say == p2.Say);	//输出：true说明张三和李四指向的是同一个方法
+
+/*
+上面做法可以看到 p1与p2共享一个函数非常棒，真的能有效节约资源，提高性能。
+	问题一：但是这个方法只适合Person类用不适合其他类用，例如下面的Bird对象用就有问题
+			但是作为全局函数的的Say()确只能被Person一个类用和全局作用域的概念不相符。
+			问题一还不是主要问题，下面问题二是核心问题。
+	问题二：如果Person类需要很多方法，就要定义很多全局函数但是这个全局函数还只能被Person完美用
+			其他类也能调用但是又不完美。也就是封装性很差。为了解决这个问题JS提供了原型模式。
+			下一节：原型模式
+*/
+
+function Bird(age){
+	this.age = age;
+	this.Say = Say;
+}
+var b1 = new Bird(2);
+b1.Say(); //输出：undefined说：公用方法节约资源！
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

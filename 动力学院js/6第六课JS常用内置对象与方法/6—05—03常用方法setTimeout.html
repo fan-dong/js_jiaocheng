@@ -1,0 +1,80 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象       *
+ ****************************
+ */
+/* 
+知识点一：setTimeout();
+	语法格式：setTimeout(code,delay)
+	功能说明：在delay时间后执行一次code中的代码。
+	参数一：code可以是任何合法的JS代码字符串，也可以是函数名。
+	参数二：以数字表示的时间，单位是毫秒。 1秒=1000毫秒
+	setInterval()的参数与setTimeout()参数含义相同，位移不同的是：
+		setTimeout指定的delay时间后调用一次，setInterval是每隔这么长时间都自动调用一次。
+知识点二：setInterval();
+	语法格式：setInterval(code,delay)
+	功能说明：每隔delay时间自动执行一次code代码
+	
+
+注意事项：
+	1、参数一只能是一个包含Javascript代码的字符串或者是一个函数名。
+	2、第二个参数指定时间到后不一定会立即执行，因为Javascript是一个单线程的解释器。
+		JS通过任务队列按先后顺进行执行任务队列中的代码。
+		setTimeout()的第二个参数告诉JS再过多长时间把当前任务添加到队列中。
+		如果队列为空，那么添加的代码会立即执行，
+		如果队列不空，就要等前面代码执行完毕后再执行。
+	才去执行后面的内容。
+	3、调用setTimeout()后，该方法会返回一个数值ID,表示超时调用。这个ID是超时调用的唯一标示符，
+		可以通过控制这个标识符来取消超时调用。取消尚未执行的超时计划使用clearTimeout(ID)。		
+
+知识点三：概念解释
+	单线程：单线程在程序执行时，所走的程序路径按照连续顺序排下来，前面的必须处理好，后面的才会执行。
+*/
+
+//标准推荐用法格式
+setTimeout(function(){
+		alert("两秒后执行我");
+	}
+,2000); 
+ 
+//标准不推荐用法格式 
+setTimeout("alert('5秒后执行我啦啦啦')",2000); 
+
+
+echo("----------------要注意的问题-------------------------");
+/*
+function fnAdd(){
+	document.writeln(666);
+}
+//错误写法：
+setTimeout(fnAdd(),2000);	//这样写会直接调用。不会延时
+
+//不推荐写法
+setTimeout("fnAdd()",2000);	//这样写正确效率低
+
+//推荐写法
+setTimeout(fnAdd,2000);	//这样写推荐
+ 
+*/
+
+var sId = setTimeout("alert('还没调用就被取消了')",2000);
+clearTimeout(sId);
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

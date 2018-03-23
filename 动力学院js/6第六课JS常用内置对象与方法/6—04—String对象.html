@@ -1,0 +1,278 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       	  		*
+ * 版权：动力学院     			*
+ * 用途：教学讲义与笔记 	    *
+ * 内容：内置对象        	   *
+ ****************************
+ */
+/*
+知识点一：string对象与字符串连接.
+在JS中，字符串是一个对象，系统提供了很多处理方法，这里我们仅学习实用的部分.
+
+代码示例一：+号连接字符串
+	var str1 = "动力",str2 = 88;
+	echo(str1+str2);
+代码示例二：concat方法连接字符串
+	语法格式：stringObject.concat(string1[, string2, ..., stringX])
+	功能：把很多字符串连接到一块，返回新生成的字符串
+	var dl = "动力";
+	var xy = "学院";
+	var js = "前端工程师训练营";
+	var dlxy = dl.concat(xy,js); 
+	document.writeln(dlxy) ;
+*/
+
+
+/*
+知识点二：length属性，用来获取字符串的长度
+	代码示例
+	var  str = "动力学院",str2 = "PHPDL";
+	echo(str.length);			//输出：4
+	echo(str2.length);			//输出：5
+
+注意：保持页面编码模式统一
+说明：这个统计的长度是以字的个数为单位，而不是以组成字的字节数为单位
+*/
+
+
+/*
+知识点三： substr()方法实现字符串的截取
+	语法格式：string.substr(start[,length])
+	功能：从string中的索引号为start位置开始截取，截取length个字符。
+		如果没有提供lenght就代表从start索引开始截取到结束。
+	参数说明：
+	参数一：start必需有。要抽取的子串的起始下标(必须是数值)。
+		如果是负数，那么该参数声明从字符串的尾部开始算起的位置。
+		也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。
+	参数二：可选参数,指定子串中的字符数(必须是数值)。
+		如果省略了该参数，那么返回从 stringObject 的开始位置到结尾的字串。
+
+代码示例： 
+	var  str = "动力学院";
+	echo(str.substr(1,2)); //输出：力学
+
+*/
+
+
+/*
+知识点四：substring()方法截取字符串
+	语法格式：stringObject.substring(from, to)
+	功能：substring()方法用于提取字符串中介于两个指定下标之间的字符。
+		返回的子串包括 开始 处的字符，但不包括 结束 处的字符。
+		如果没有提供 to 参数代表一直截取到结尾。
+	参数说明：
+	参数一：from是必需的参数。一个非负的整数.
+		规定要提取的子串的第一个字符在 stringObject中的位置。
+	参数二：可选参数，一个非负的整数，描述了要提取的子串的最后位置下标(不包含最后一个)。
+		如果省略该参数，那么返回的子串会一直到字符串的结尾。		
+	
+	代码示例：document.writeln("edudongli.com".substring(3,5)); //输出do		
+			说明：d的下标是3，o的下标是4，n的下标是5.
+			substring截取的子串只包含5之前的部分。
+*/
+ 
+ 
+/*
+知识点五：字符串大小写转换方法
+	语法格式：stringObject.toLowerCase() 
+	功能：把指定字符串都转换成小写
+	语法格式：stringObject.toUpperCase()
+	功能：把指定字符串都转换成大写
+	代码示例：
+	var str = "EduDongLi.com";
+	document.writeln(str.toLowerCase()); //输出：edudongli.com 
+	document.writeln(str.toUpperCase()); //输出：EDUDONGLI.COM 
+*/
+
+
+/*
+知识点六：字符与ASCII码相互转换方法
+1、stringObject.charCodeAt()方法
+	语法格式：stringObject.charCodeAt(index)
+	功能：返回定位置的字符的ASCII码,如果没有提供index参数返回第一个字符的ASCII。
+	代码示例：var dl = "动力";
+	document.writeln(dl.charCodeAt(1)) ; //21147 
+	注意事项：文件编码和浏览器访问编码要统一，否则结果不可确定。
+2、	fromCharCode()方法
+	语法格式：String.fromCharCode(ASCII)
+	功能：返回指定ASCII码对应的字符
+	代码示例：document.writeln(String.fromCharCode(21147)) ; //输出：力
+	
+*/
+
+/* 
+知识点七：字符串的查找
+根据字符串,查找其在另一个字符串中出现的索引号的indexOf()方法
+	语法格式：stringObject.indexOf(Str);
+	功能：在stringObject中查找 Str 首次出现的索引序号
+	代码示例：
+	str = "动力学院，动力学院";
+	echo("-------字符串的精准查找------"); 
+	echo(str.indexOf("学")); //输出：2，根据字符查找其第一次出现的位置
+	echo(str[2]);		//输出：学，根据提供的位置输出字符
+	echo(str.indexOf("我"));  //输出 -1，如果查找的字符在字符串中不存在返回-1
+
+
+根据索引号查出对应字符串的方法 charAt()
+	语法格式：stringObject.charAt(index)
+	代码示例：
+	功能说明：返回Index索引号指定位置的字符串，
+	document.writeln("edudongli.com".charAt(2));
+*/
+
+
+/*
+知识点八：search()方法
+	语法格式：stringObject.search(searchvalue)
+	功能：用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
+		返回与指定查找的字符串或者正则表达式相匹配的 String对象起始位置。
+		如果没有找到任何匹配的子串，则返回 -1。	 
+	参数说明：searchvalue 必须的参数可以是要查找的字符串或者正则表达式。 		
+
+	代码示例一：
+	var str = "DLdl"
+	document.writeln(str.search("d")) ;  //输出2,用字符直接搜索
+	document.writeln(str.search(/d/i)) ; //输出：0，用不区分大小写的正则搜索。
+	//多行模式的搜索应用
+	var str = "mDL\nDl"
+	document.writeln(str.search(/^d/mi)) ; //输出：4
+	
+*/
+ 
+
+/*
+知识点九：match()方法
+语法格式：
+	stringObject.match(regexp) 
+	参数： regexp规定要匹配的模式对象。如果该参数不是 RegExp 对象，会被自动转换为 RegExp 对象。
+	返回值：返回值存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。
+一、如果 regexp 没有标志 g，那么 match() 方法就只能在 stringObject 中执行一次匹配。
+	如果没有找到任何匹配的文本返回 null。
+	如果匹配成功则返回一个数组，其中存放了与它找到的匹配文本有关的信息。
+	该数组的第0个元素存放的是匹配文本，而其余的元素存放的是与正则表达式的子表达式匹配的文本。除了这些常规的数组元素之外，返回的数组还含有两个对象属性
+	1、index 属性包含的是匹配文本的起始字符在 stringObject 中的位置。
+	2、input 属性包含的是对 stringObject 的引用。
+
+二、如果regexp具有标志g，则 match()方法将执行全局检索，找到 stringObject 中的所有匹配子字符串。
+	若没有找到任何匹配的子串，则返回 null。
+	如果找到了一个或多个匹配子串，则返回一个数组。不过全局匹配返回的数组的内容与前者大不相同，它的数组元素中存放的是 stringObject 中所有的匹配子串，而且也没有 index 属性或 input 属性。
+
+代码示例一：首次匹配 
+	str = "动力学院，PHP学院，中国，PS学院";
+	var arr = str.match(/[a-z]+学院/i);
+	for(p in arr){
+		echo("arr["+p+"]="+arr[p]);
+	}
+
+代码示例二：全局匹配	
+	str = "动力学院，PHP学院，中国，PS学院";
+	var arr = str.match(/[a-z]+学院/gi);
+ 	document.writeln(arr);	//输出：PHP学院，PS学院
+
+*/
+
+
+/*
+知识点十：replace()方法
+	语法格式：stringObjcet.replace(searchvalue,newvalue)
+	功能：在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+	参数说明：
+	参数一：必须提供的参数，规定子字符串或要替换的模式的 RegExp 对象。
+	注意事项：如果该值是一个字符串，则将它作为要检索的直接量文本模式，而不是首先被转换为 RegExp 对象。这点与match参数不同
+	参数二：必须提供的参数，一个字符串值。用来替换查找到的字符。
+
+	代码示例：	
+	str = "动力学院，动力学院";
+	//替换首个
+	var strReplace = str.replace("动力","PHP");
+	echo(strReplace);	//输出：PHP学院，动力学院
+	//全局替换
+	var strReplace = str.replace(/动力/g,"PHP");
+	echo(strReplace);	//输出：PHP学院，PHP学院
+*/
+
+/*
+知识点十一：split()方法，将字符串转换成数组
+说明：split()方法用于把字符串以特定符号为准进行切割成数组。
+	返回：返回切割后生成的新数组，不影响原字符串。
+	语法格式：stringObject.split(separator, howmany)
+		参数一：separator是分割符号可以是字符串也可以是正则表达式。
+		参数二：howmany是返回的新数组的长度，如果这个参数很大和没有是一样效果。
+
+代码示例一：
+	str = "动,力,学,院" ;
+	var arr = str.split(",");
+	arr.push("PHP");			//push是数组特有方法，如果arr是字符串会报错
+	echo(arr);	
+
+代码示例二：
+	var str = "seoPhpJs"
+	document.writeln(str.split(/p/i)) ;   //输出： seo,h,Js 	
+
+代码示例三：
+	var str = "seoPhpJs"
+	document.writeln(str.split(/p/i,2)) ;   //输出： seo,h 	
+*/
+
+
+/*
+知识点十二：slice()方法
+	语法格式：string.slice(start,end)
+	功能：方法可提取字符串的某个部分，并返回新被提取的部分。
+	参数说明：
+	参数一：必选参数，要抽取的片断的起始下标。第一个字符位置为 0。
+		如果start数是负数，那么它规定的是从字符串的尾部开始算起的位置。
+	参数二：可选参数，指定要提取的片段的结尾的下标。
+		若未指定此参数，则要提取的子串包括 start 到原字符串结尾的字符串。
+
+代码示例：
+	var str = "http://www.phpdl.com"; 
+	
+	//从第一个提取，提取到下标为"7-1"的位置
+ 	document.writeln(str.slice(0,7)); //输出：http://
+	//从倒数第一位提取，提取剩下的所有内容
+ 	document.writeln(str.slice(-1)); //输出：m	
+	//从倒数第三个提取，提取到字符串结尾
+ 	document.writeln(str.slice(-3)); //输出：com	
+	
+	
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

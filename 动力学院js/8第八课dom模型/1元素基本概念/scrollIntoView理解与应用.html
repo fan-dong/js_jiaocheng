@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>scrollIntoView- 让一个元素快速进入可视区域 - 动力学院</title>
+<style type="text/css">
+div{ width:300px; height:300px; border:5px #06F solid; margin-bottom:10px;}
+#box4{ cursor:pointer;}
+#box{ width:360px; height:400px; overflow:scroll; margin-top:100px;  }
+ 
+</style>
+</head>
+
+<body>
+<div id="box">
+<div id="box1">动</div>
+<div id="box2">力</div>
+<div id="box3">学</div>
+<div id="box4">院</div>
+</div> 
+<script type="text/javascript">
+var box3 = document.getElementById("box3");
+var box4 = document.getElementById("box4");
+var box1 = document.getElementById("box1");
+box3.scrollIntoView(false);
+box4.addEventListener('click',F,false);
+function F(){
+	box1.scrollIntoView();
+}
+
+/*
+语法格式：object.scrollIntoView( [bAlignToTop = true])
+功能：让一个元素快速移动到可见区域
+参数说明：bAlignToTop 是bool值
+	默认值是true：代表尽可能的让元素的顶部与父元素对齐可见(看下面元素长度情况，如果很长就是以顶部与浏览器顶部对齐，如果很少则显示所有及其后元素就停止)。
+	如果是false代表：代表尽可能的让元素的底部与父元素底部对齐可见即可。
+
+课后思考：在元素是定位的情况下会怎么样？请自己动手做一个例子练习。	
+*/
+</script>
+</body>
+</html>

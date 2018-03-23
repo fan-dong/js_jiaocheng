@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>属性节点兼容问题 - 动力学院</title>
+<style type="text/css">
+.box {
+	width:300px;
+}
+</style>
+</head>
+
+<body>
+<pre>
+<div class="box" id="box" style="border:5px solid #0C3; height:200px;">动力教育</div>
+<script type="text/javascript">
+var getStyle = function(element){
+        return element.currentStyle || document.defaultView.getComputedStyle(element, null);
+}  
+/*
+知识点一：elementObj.style 格式仅仅用来获取和设置行内CSS ,以下两个只能读取不用来设置。
+
+知识点二：elementObj.currentStyle IE专用获取非行内CSS（即外部文件，及页级CSS）
+
+知识点三：document.defaultView.getComputedStyle 兼容w3c新标准的THML5的新版浏览器
+	格式二：getComputedStyle(element, null)
+	参数一：element要获取外部css的元素对象。
+	参数二：获取指定元素的伪类的css样式，一般都不用伪类直接写null即可。
+代码示例如下：	
+*/
+var box = document.getElementById("box");
+var  styleObj = getStyle(box);
+document.writeln(styleObj["width"]);  //格式一：读取css中的宽度(可以使用变量代替width)
+document.writeln(styleObj.width);	//格式二：读取css中的宽度(不能使用变量代替width)
+</script> 
+</pre>
+</body>
+</html>

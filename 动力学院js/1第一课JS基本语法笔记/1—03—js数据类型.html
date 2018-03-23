@@ -1,0 +1,152 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ ****************************
+ */
+/* 
+知识点一：JavaScript数据类型介绍：JS一共有6种数据类型
+	1、Number  数值型
+	2、String	字符串型
+	3、Boolean	布尔型
+	4、Undefined	未定义类型
+	//以上四种称为基本数据类型，NULL认为是特殊类型
+	5、NULL	 
+	//第六个是一种复合数据类型
+	6、Object	对象型
+*/
+
+/********************************************************	
+知识点二：JS类型检测操作符，注意是全部小写：typeof 
+	typeof语法格式：typeof  变量 
+	返回值：返回变量的类型，是上面6种类型之一。
+*/
+//代码示例，各种类型 
+document.writeln(typeof a); 	//输出：undefined
+//alert(a); 					//程序错误
+var a2;							//这个是未初始化的变量
+document.writeln(typeof a2); 	//输出：undefined
+//alert(a2);					//提示: undefined
+/* 
+说明：尚未定义的变量和定义变量但是没有赋值的是不一样的。
+尚未定义的a是不存在的所以alert会参数错误，下面的a2是定义了没有赋值默认会被赋予：undefined 
+但是使用typeof检测的结果都是未定义的，一个是说未定义的类型，一个是说值是未定义的也是未定义的类型。符号不知道的这种逻辑思维
+*/
+var b = 2;
+document.writeln(typeof b); //输出：number  
+var c = "动力学院";
+document.writeln(typeof c); //输出：string
+var d = "";			 
+document.writeln(typeof d); //输出：string,空字符串
+var e = null;
+document.writeln(typeof e); //输出：object 
+var t = true ;
+document.writeln(typeof t);	//输出 boolean
+var o1 = new Object();
+document.writeln(typeof o1);	//输出：object
+var o2 = null;
+document.writeln(typeof o2);	//输出：object
+var o3 = {};
+document.writeln(typeof o3);	//输出：object
+/* 
+null使用typeof 返回object并没有返回null,因为null是对空对象的引用。
+提示：老版本的浏览器中可能会有function类型，现在统一为object类型
+undefined 是未经过初始化赋值的变量
+null  是空对象的指针
+*/
+
+/*************************************************************************************
+知识点三：对象的概念与科学计数法
+//对象的概念
+一切都是对象，比如人是对象，人类是类型，人有四肢是属性，人会讲话这种动作称为方法。
+所有对象都是有：属性与方法组成。
+
+//科学计数法
+对于较大或较小的天文数字一般用科学计数法表示
+例如：2e20 代表  2*10^20 也就是2乘以10的20次方
+由于硬件原因，各种计算机保存数值的位数是有限的JS范围一般是
+5e-324  到 1.79e308       当然这个数字已经是非常大的数值，一般情况下我们无须担心会越过这个数值。
+超过这个范围的会被认为是无穷大Infinity
+*/
+
+
+/************************************************************************************
+知识点四：数据类型的相互转换
+*/
+//字符串与数值型相互转换
+document.writeln("**********数据类型转换************");
+//数值型转换成字符串型
+var nA = 2008;
+document.writeln(typeof nA);
+var sB = nA.toString();
+document.writeln(typeof sB);
+
+//开始带数值的字符串型转换成数值型
+var sC = "2020CHINA";
+var nD = parseInt(sC);
+echo(nD);
+echo(typeof nD);
+
+echo('开始为非数值型的转换为字符串型');
+var sE = "CHINA1949";
+var sE2 = parseInt(sE);
+echo(sE2);	//输出 NaN ，Not a Number 不是一个数值的意思,强制把一个非数值型字符转化成字符直接返回NaN
+echo(typeof sE2);	//输出 number
+
+echo('布尔型转换成数值型');
+var bTrue = true;
+var nTrue = parseInt(bTrue);
+echo (nTrue);	//输出NaN，NaN是一个特殊的数值请记忆
+
+echo('数值型转化成布尔型');
+var nTrue = 2008;
+var bTrue = Boolean (nTrue); 	//这种风格称为强制类型转换，类似的也有 String(value)，Number(value)
+echo (bTrue);	//输出true,结论：所有非0值被认为是true，空值与0值被认为是false
+
+echo('************类型转换函数与强制类型转换的区别************');
+echo('**toString与String进行强制类型转换的区别**');
+var A = null;
+//b = A.toString();   //这样会产生一个错误
+//echo (b);			//输出空白
+var c = String(A);	
+echo (c);			//输出：null 并且无错误
+
+echo('**parseInt与Number强制类型转换的区别**');
+echo(parseInt(true));	//输出NaN，parseInt与parseFloat专门用于解析字符串
+echo(Number(true));		//输出1，Number可以用于任意类型的数据
+echo('Number转换规则如下');
+echo(Number(true)); 	//输出：1，因为布尔型true会被转化成1，false会被转化为0，数值保持不变。
+echo(Number(null));		//输出：0，因为null会被转化为0
+echo(Number(""));	//输出0,空字符串会被转化为0 
+echo(Number(undefined));	//输出 NaN
+echo(Number("abc"));	//输出NaN
+echo(Number("22abc"));	//输出NaN，任意非纯数值型的字符串都会转化成NaN
+
+
+/****************
+结语：进制转换很多无法穷举，但是学习掌握起来很简单，常用的方法
+	1、参考手册熟悉记忆法
+	2、基本原则测试对比法
+比如：2进制，8进制，10进制与16进制之间的相互转换等等
+parseInt("10",   2);   //return   2 
+parseInt("10",   8);   //return   8 
+parseInt("10",   10);   //return   10
+parseInt("10",   16);   //return   16
+*/
+
+
+//下面一个是函数可以跳过，因为了输出方便临时使用
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+	
+}
+</script>
+</pre>

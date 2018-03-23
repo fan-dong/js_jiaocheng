@@ -1,0 +1,64 @@
+<pre>
+<h1 id="h1"></h1>
+<h1 id="h2"></h2>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：内置对象       *
+ ****************************
+ */
+/* 
+知识点一：间歇调用，interval，间隔，间歇 
+//注意：document.write();会重写页面，在setInterval中尽量不要使用document.write();
+*/
+var i=1,sum=0,intervalID=null;
+var h1 = document.getElementById("h1");
+var h2 = document.getElementById("h2");
+function fnAdd(){
+	
+	if(i==10){
+		clearInterval(intervalID);
+	}
+	sum += i;
+	i++;
+	
+	h1.innerHTML = sum;
+}
+intervalID = setInterval(fnAdd,500);
+
+//可以用setTimeout代替setInterval
+var j=1,sum2=0,setID=null;
+setTimeout(fnAdd2,500);
+function fnAdd2(){
+	if(j>10){
+		alert("OK");
+	}
+	else{
+		sum2 += j;
+		j++;
+		h2.innerHTML = sum2;
+		setTimeout(fnAdd2,500);
+	}
+}
+
+/*
+说明：
+如果能使用 setTimeout代替setInterval的地方尽量使用setTimeout.
+*/
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+
+</pre>

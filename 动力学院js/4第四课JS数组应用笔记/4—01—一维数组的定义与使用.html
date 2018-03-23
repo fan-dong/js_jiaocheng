@@ -1,0 +1,160 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：数组对象           *
+ ****************************
+ */
+/*
+知识点一：数组对象的定义
+	格式一：
+		var aArrayName = new Array('PHP','seo','JS');
+	格式二：
+		var  aArrayName = new Array([n]);
+		说明：如果指定一个参数n用来指定数组长度，格式一，二的new可以省略。
+	格式三与四：
+		var aArrayName  = ['PHP','seo','JS']
+		var  aArrayName = []  
+	说明：var  aArrayName = [n] 如果有n的话不是指定数组默认长度，而是把n理解为一个普通元素。
+	说明：数组就是一组数据的集合，集合中的每一项都称为数组的元素,数组中元素的多少称为数组的长度。
+	数组元素可以分别用来保存不同的内容。
+	注意：JS的数组比较特别与其他语言相差很大，他本质仅仅是一种数据结构，形式有像面向对象中的类的感觉。
+案例解释：
+*/
+var arr1 = new Array('PHP','seo','JS');
+echo(arr1[0]); 	//输出 PHP
+echo(arr1[1]); 	//输出 seo
+echo(arr1[2]); 	//输出 JS
+/*
+	说明：数组元素的访问用中括号语法，其中间的数字称为数组的索引，也就是个编号，这个编号从0开始。
+	上面数组的长度是：3，因为有三个。
+	数组长度和索引的关系：数组的长度 = 最大索引值加1
+*/
+echo(arr1.length); //输出3， 可以通过length自动获取索引数组的长度，注意：不能获取下面要讲的关联数组的长度
+
+//向数组中添加元素 
+arr1[3] = "动力";
+arr1[10] = "学院";
+echo(arr1.length);	//输出 11
+
+/*
+知识点二：length属性精讲 
+	特别的length属性，length不仅仅可以自动获取，也允许我们修改，如果length的值小于数组元素索引值
+	那么索引值比length-1大的部分元素会丢失掉。因此：应用时候应特别小心，不能随意给length赋值。
+*/
+arr1.length = 10;
+echo('通过for...in可以遍历数组中的属性也就是索引')
+for(p in arr1){
+	echo(p);
+}
+
+
+//知识点三：给数组添加元素
+echo('------在数组末尾添加元素常用的方法------');
+var arr2 = Array();
+arr2[arr2.length] = "动";
+arr2[arr2.length] = "力";	//arr2.length会自动加1
+arr2[arr2.length] = "学";
+arr2[arr2.length] = "院";
+//遍历数组元素
+for(p2 in arr2){
+	echo("arr2["+p2+"] = "+arr2[p2]);
+}
+/*
+输出如下
+arr2[0] = 动
+arr2[1] = 力
+arr2[2] = 学
+arr2[3] = 院
+*/
+
+
+echo('------用instanceof检测一个对象是不是数组------');
+//instanceof 与 isArray检测一个对象是否是数组
+var arr3 = Array();
+echo(arr3 instanceof Array);	//输出true
+
+var arr4 = ["P","H","P"];
+echo(arr4 instanceof Array) ; //输出 true
+echo(Array.isArray(arr4));		//检测方法二
+//其他非数组对象检测会显示false
+var arr6 = {
+	a:'动',
+	b:'力',
+	c:'学',
+	d:'院'
+};
+echo(arr6 instanceof Array);	//输出false
+
+
+/**********************************************************************************************************
+之前学习是索引号是数字的称为索引型数组，对索引是字符串的称为关联数组
+*/
+echo('------关联型数组------');
+var aArr1 = [];
+aArr1['P'] = "PreProcessor";		//添加元素
+aArr1['H'] = "HyperText";
+echo(aArr1['P']);			//关联数组访问方法
+echo(aArr1.H);			//还可以这样访问
+echo('------for...in访问关联数组------')
+for(p in aArr1){
+	echo('aArr1['+p+']='+aArr1[p]);
+}
+//关联数组是不是数组？
+echo(aArr1 instanceof Array); //输出 true，说明：关联数组也是数组
+
+//关联数组length,会产生错误，因为length是为索引数组设计的与索引有亲密关系
+//ehco(aArr1.length);
+
+
+echo('------先索引后关联型数组问题------');
+var arr2 = ['P','H','P'];
+echo(arr2.length);		//输出：3
+arr2['S'] = "SEO";
+echo(arr2.length);		//输出：3 ，添加关联元素不影响length值
+//查看数组细节
+for(p in arr2){
+	echo('arr2['+p+']='+arr2[p]);
+}
+/*
+输出：
+arr2[0]=P
+arr2[1]=H
+arr2[2]=P
+arr2[S]=SEO
+*/
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+}  
+</script>
+实战带动学习激情：数组在网站中的实际应用，比如购物车中多个文本框中的价格的自动计算
+<form action="#">
+<input type="text" value="2.55" name="price">
+<input type="text" value="3.5" name="price">
+<input type="text" value="4.501" name="price">
+<input type="text" value="5.5" name="price">
+</form> 
+<script language="javascript">
+var price = document.getElementsByName("price");
+var i=0,sum=0;
+for(i=0;i<price.length;i++){
+	sum = sum+parseFloat(price[i].value);
+}
+echo("合计总价："+sum.toFixed(2));
+/*
+说明：通过观察我们可以看到以上代码用到很多没有见多的知识，但是也有很多已经学过的知识。
+所以我们还得继续认真学下去，里面用到很多函数都需要大家认真努力学习。下一节我们先学习数组常用函数。
+*/
+</script>
+</pre>

@@ -1,0 +1,73 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：函数应用       *
+ ****************************
+ */
+/*
+本进阶领域讨论的问题实用性不强，但是需要大家了解。对于有时间同学建议记忆精通。
+通过例子来理解领悟：
+*/ 
+//观察现象一
+var i=10;
+var i;		//如果仅仅是重复声明：声明会被忽略，如果声明同时赋值情况就会变化，请自己尝试
+echo(i);  //输出10
+
+echo("------函数还可以这样,把一个函数放到表达式中---------");
+var fnR = (
+	function f(n){
+		if(n<1){return 1;}
+		else{		 
+		  echo(n);
+		  f(n-1);
+		}
+	});
+
+fnR(5) ; 
+
+/*
+知识点：callee关键字
+arguments.callee是一个指向正在执行的函数的指针，能够返回函数本身。也就是可以代替函数名称
+用法格式：[function.]arguments.callee
+注意：在严格模式下行不通，了解即可
+*/
+echo('-----通过arguments的calee实现递归调用----');
+function fnR5(p) {
+  if(p>1){
+	   arguments.callee(p-1); 
+	   //相当于 fnR5(p-1),优点是如果函数体很庞大，修改函数名时候这个地方代码不用动
+	   //也就是函数名修改函数体无需修改。因为arguments.callee会自动获取当前函数名
+	   echo(p) ;
+	}
+}
+fnR5(6);
+
+echo('----通过arguments的calee属性打印函数自身----');
+function calleeDemo() {
+  echo(arguments.callee);
+}
+calleeDemo();
+echo('---------如何连续调用匿名函数？通过如下方式---------');
+(function(p) { 
+	echo(p); //第一次运行输出p1并返回现场调用第二次返回P2，直到三次调用完成
+	//echo(arguments.callee);
+	return arguments.callee; 
+})('P1')('P2')('P3');  
+
+ 
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

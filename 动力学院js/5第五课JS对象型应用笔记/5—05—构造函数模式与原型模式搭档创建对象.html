@@ -1,0 +1,68 @@
+<pre>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+			
+ /*
+ 说明：为了解决上一节的引用属性问题在实际项目中经常把构造函数模式与原型模式的结合一块使用。
+ 		把可以共享的方法和属性教给原型模式，每个个体特有的属性让构造函数来处理。
+		这样就实现每个示例都有自己的一份实例属性副本，同时又共享着对方法的引用，最大限度的节约内存。
+ */
+	 
+	function P(name,like){
+		this.name = name;
+		this.like = like;
+	}
+	P.prototype.Say = function(){
+		echo(this.name+"说：原型中也能说话！");	
+	};
+	P.prototype.sex = "男";
+	
+	var p1 = new P("张三",["打球","游泳"]);
+	p1.like.push("学习");
+	echo(p1.like);			//输出：打球,游泳,学习 。没有问题
+	
+	var p2 = new P("李四",["打球","游泳"]);
+	p2.like.push("唱歌");
+	echo(p2.like);			//输出：打球,游泳,唱歌 。 也没有问题
+	echo(p1.Say==p2.Say);	//输出：true  证明两个是共享一个方法
+    echo(p1.sex==p2.sex);	//输出：true
+
+
+//把构造函数与原型分开的写法感觉他们不像一个整体，也可以如下改写效果是完全一样，仅仅是写法不同
+/*
+//把原型模式写入到构造函数内部
+ 	function P(name,like){
+		this.name = name;
+		this.like = like;
+		P.prototype.Say = function(){
+			echo(this.name+"说：原型中也能说话！");	
+		};
+		P.prototype.sex = "男";
+	}
+*/
+
+
+
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

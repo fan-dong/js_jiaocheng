@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>clientTop的理解-动力学院</title>
+<style type="text/css">
+* {
+	margin:0px;
+	padding:0px;
+}
+div {
+	border:50px #000 solid;
+	width:200px;
+	height:200px;
+	margin:10px;
+	padding:10px;
+	border-top-width:20px;
+ 
+}
+</style>
+</head>
+
+<body>
+<div id="box1">
+   
+</div>
+<script language="javascript">
+oDiv = document.getElementById("box1");
+oDiv.onclick = function(){alert(oDiv.clientTop);}
+//clientTop 的结果就是 border-top-width:20px;的值20,注意不带单位
+</script>
+</body>
+</html>

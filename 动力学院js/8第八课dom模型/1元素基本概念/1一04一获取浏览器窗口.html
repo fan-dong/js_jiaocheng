@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>footer-动力学院</title>
+<style type="text/css">
+body{ margin:0px; padding:0px;}
+.div1 {
+	height:300px;
+	width:200px;
+	border:50px #eee solid;
+}
+</style>
+</head>
+<body>
+<div id="box">
+<div class="div1" id="box1"> </div>
+<div class="div1" id="box2"> </div>
+<div class="div1" id="box3"> </div>
+</div>
+<h1 id="h1" style="position:fixed; background:#CCC; right:0px; top:100px; width:200px; height:200px; ">111</h1>
+<script type="text/javascript">
+//获取网页的总高度
+var totalH = document.body.offsetHeight;
+//获取网页向上滚动的高度
+
+//获取浏览器当前窗口高度
+var innerH = window.innerHeight ||  document.getElementsByTagName("html")[0].offsetHeight;
+//获取浏览器当前窗口的宽度
+var innerW = window.innerWidth ||  document.getElementsByTagName("html")[0].offsetWidth;
+var scrollT = 0;
+//box1
+var box1H = box3.offsetTop;
+str = "offsetHeight = "+totalH;
+str += "\n scrollTop = "+scrollT;
+str += "\n innerH = "+innerH;
+str += "\n innerW = "+innerW;
+str += "\n 以下是元素位置信息";
+str += "\n box1H = "+box1H;
+window.onscroll  = function(){
+	scrollT =  document.documentElement.scrollTop || document.body.scrollTop  ;
+	h1.innerHTML= scrollT;
+};
+</script>
+</body>
+</html>

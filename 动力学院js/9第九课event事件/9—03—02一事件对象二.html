@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件对象专题-动力学院</title>
+<style type="text/css">
+#mydiv {
+	width:300px;
+	height:200px;
+	background-color:#CCC;
+}
+#myh1 {
+	width:150px;
+	height:100px;
+	background-color:#00f;
+}
+</style>
+</head>
+
+<body>
+<div id="mydiv">
+  <h1 id="myh1"></h1>
+</div>
+<pre>
+<script language="javascript">
+var mydiv = document.getElementById("mydiv");
+var myh1 = document.getElementById("myh1");
+//代码示例一：判断事件是否冒泡
+/*
+myh1.onclick = A;
+mydiv.onclick = A;
+function A(ev){
+	var ev = ev || window.event;
+ 	alert(ev.bubbles);
+}
+*/
+ 
+
+
+//代码示例二：阻止事件冒泡
+/*
+myh1.onclick = myStopPropagation;
+mydiv.onclick = myStopPropagation;
+function myStopPropagation(ev){
+ 	alert(this.id);
+	if(ev){		ev.stopPropagation();	}
+	else{	window.event.cancelBubble = true; }	
+}
+*/
+ 
+//代码是示例三：事件目标与当前目标
+/*
+myh1.onclick = T;
+mydiv.onclick = T;
+function T(ev){
+	if(ev) 	alert(ev.target + "\n" + ev.currentTarget);
+	else  alert(event.srcElement + "\n" + this.id);
+	//事件首次发生时的目标用target，事件冒泡到的当前目标叫 currentTarget
+}
+*/
+
+//代码示例四，阻止事件的默认行为
+/*
+var mya = document.getElementById("mya"); 
+mya.onclick = A;
+function A(ev){
+	if(ev)	ev.preventDefault();
+	else  window.event.returnValue=false;
+}
+*/
+
+//代码示例五：事件类型的应用
+/*
+myh1.onclick = myEvent;
+myh1.onmousedown = myEvent;
+myh1.onmouseover = myEvent;
+function myEvent(ev){
+	var ev = ev||event;
+	switch(ev.type){
+		case "click":
+			alert("click事件");
+			break;
+		case "mousedown" :
+			alert("鼠标按下了");
+			break;
+		default:
+			alert(ev.type);
+	}
+}
+*/
+</script>
+
+<!--
+知识一：事件对象公有属性和方法，以下是w3c标准与IE早期版相关对比。
+	每个特定事件会赋予事件对象个性化的属性和方法，但是所有事件也有以下公有的属性和方法。
+	1、bubbles	只读属性，可以用来判断事件是否冒泡，如果冒泡结果为true 否则为false.
+    	说明：IE下无此属性，了解即可
+	2、stopPropagation() 只读方法，取消事件的进一步捕获或冒泡。	propagation：蔓延，扩展
+		说明：IE早期版本取消事件冒泡需要使用 window.event.cancelBubble = true; 来阻止事件冒泡。
+        	IE的cancelBubble默认值为false.
+	3、target	事件目标（就是事件发生源头）, 与 currentTarget 当前事件所处的目标
+    	IE下：stcElement 等同于标准的 target ,因为currentTarget 与this等价，可以统一用this
+	4、preventDefault()取消事件的默认行为，当cancelable为true有效。
+    	用途举例：取消超级链接a的点击效果        
+        IE下有对应的：returnValue属性设置为false与此方法等同，默认值为true.
+	5、type 属性事件类型，IE与dom标准相同，获取被触发的事件类型   
+    
+    6、relatedTarget属性，可以用代替的属性，分别是 fromElement和toElement
+    	说明：relatedTarget仅在发生mouseover和mouseout事件时有效,在其他情况下其值为null
+        	fromElement和toElement 同样只在发生mouseover和mouseout事件时有效
+    
+    
+-->
+</pre>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<pre>
+<h1 id="Dh1">动力</h1>
+<h1 id="Dh2">学院</h1>
+<script type="text/javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：DOM模型            *
+ ****************************
+ */
+/*
+知识点一：DOM概念
+	Document,Object,Model文档对象模型，DOM模型给我们动态控制HTML提供了无限自由。
+	用途：例如不同时间显示不同网页，动态添加、修改，删除HTML元素等。	
+1、再识HTML的结构
+	在王畅排长奉献的dom模型图中可以看到最上面的是HTML，称为《文档元素》，他没有父元素(但是有父节点“document”)，有没有兄弟节点呢？(不同浏览器有不同看法，大部分都认为其没有兄弟节点，在实际应用中意义不大，如果碰到注意下即可)。
+	
+	向下能看到<head></head>和<body></body>两个分支，他们在同一层但是不相互包含，他们之间是兄弟关系，有着
+	共同的父元素<html>.继续向下看：body下面有div,span元素他们又是兄弟关系，父亲是body元素。依次类推...
+	通过这种形式进行划分使整个HTML文档结构很清晰，各个元素之间的关系也很容易描述。
+
+2、节点的概念
+	一个DOM文档是有很多个小的单元组成的一个大集合，这些小单元我们称为节点。
+
+3、节点类型
+	DOM中把节点分为十二种类型常用的有以下几种类型。
+	3.1、元素节点
+	3.2、属性节点
+	3.3、文本节点
+	3.9、document
+	3.11、文档片段(fragment)
+	
+	
+
+例如：<a href="http://www.phpdl.com" title="动力学院">连接词动力学院</a>
+那么：<a>标签就是元素节点
+	  href及title就是属性节点
+	  连接词动力学院，就是文本节点。
+
+知识点二：访问节点
+	认识节点后，如何控制他们就是dom模型章节的重点，DOM中常用的访问节点的两个方法。
+	1、getElementById()
+	2、getElementsByTagName()
+*/ 
+/*
+	getElementById(ID)返回指定ID的元素对象，标准的HTML中要求ID必须唯一。
+	代码示例：
+*/
+ 
+var obj1 = document.getElementById("Dh1");
+var obj2 = document.getElementById("Dh2");
+
+//alert(obj1.innerText + obj2.textContent);	//输出 动力学院,在谷歌下
+/*
+IE老版本只认： innerText，火狐只认：textContent， 新版本都认：textContent
+注意：ID号请不要和其他元素的name重名，在IE老浏览器中可能会产生错误。
+*/
+
+/* 
+	getElementsByTagName(TagName);
+	功能：获取相同元素名的对象列表到数组中。
+	代码示例：
+*/
+
+var hlist = document.getElementsByTagName("h1");
+//alert( hlist[0].textContent );	//输出动力
+
+//用途举例：动态批量修改样式
+for(p in hlist){
+	hlist[p].style.color="#ff0000";
+	hlist[p].style.border="5px #ff0000 solid";
+	hlist[p].style.width = "300px";
+	hlist[p].style.borderRadius = "30px";
+}
+ 
+
+/*
+注意：很多JS代码需要HTML文档加载完毕后才能正确获取对应元素，所以一般都把JS放到最后,或用onload事件判断页面是否加载完毕。
+*/ 
+</script>
+</pre>

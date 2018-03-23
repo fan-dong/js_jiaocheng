@@ -1,0 +1,43 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：函数应用           *
+ ****************************
+ */
+/*
+可变函数：函数名字其实就是一个代表符号。
+案例理解可变函数：
+*/
+//求两个数之和
+function fnAdd(a,b){
+	echo(a+b);
+}
+
+function fnD(fn,a,b){
+	fn(a,b);
+}
+
+fnD(fnAdd,2,3);   //输出5 ，这种把函数作为参数传递形式称为可变函数
+
+//还可以如下这样
+var fnB = fnAdd; //把函数名字保存到不同的变量中，这个本质和上例一样
+fnB(3,6);
+
+//说明：对函数名字进行各种不带圆括号的赋值，并不调用函数，就相当于给函数又起了个别名。
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

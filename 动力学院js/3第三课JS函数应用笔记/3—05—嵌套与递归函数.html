@@ -1,0 +1,58 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：函数应用           *
+ ****************************
+ */
+/*
+知识点一：函数的嵌套，函数中继续定义函数称为函数的嵌套。
+示例如下：函数可以无限制嵌套，并且内层函数必须在外层函数里面调用，不能再外层函数之外被访问。
+*/
+function fnA(){
+	function fnB(){
+		function fnC(){
+			echo('fnC');
+		}
+		fnC();
+		echo('fnB');
+	}
+	fnB();
+	echo('fnA');		
+}
+fnA(); 
+//fnB();	//调用无效，无法访问到函数内部的函数
+
+/*
+知识点二：函数的递归，函数自己调用自己叫递归
+注意：递归必须有退出递归的条件否则成为死循环。
+*/
+echo('-----递归的案例----');
+//通过递归输出对称数字
+function fnR(p){ 	
+	if(p>1){			
+		echo(p-1); 
+		fnR(--p);
+		echo(p);
+	}
+}
+fnR(6);
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

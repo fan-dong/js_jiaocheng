@@ -1,0 +1,59 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：函数应用           *
+ ****************************
+ */
+/*
+知识点一：函数的进一步理解
+*/
+function fnA(){
+	var rs = new Array();
+	for(var i=0;i<10;i++){
+		rs[i] =  function(){ return i;}  ;
+	}
+	return rs;
+}
+var rst = fnA()
+echo(rst[0]());		//输出什么呢？
+echo(rst[1]());		//输出什么呢？
+echo(rst[2]());		//输出什么呢？
+echo(rst[3]());		//输出什么呢？
+/*
+改写以上代码,方便大家理解与感悟，函数具有动态性。里面的变量在执行的时候才会进行找其具体值。
+*/
+var j =1;
+function fnJ1(){ return j;}
+var j=2;
+echo(fnJ1());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

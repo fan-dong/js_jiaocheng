@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>表单事件之复选框应用案例-动力学院</title>
+</head>
+
+<body>
+<form>
+  <table id="listTbl">
+    <tr>
+      <td><input type="checkbox" id="sel"></td>
+      <td>全选</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="chk[]" value="1"></td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="chk[]" value="2"></td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="chk[]" checked value="3"></td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="chk[]" value="4"></td>
+      <td>D</td>
+    </tr>
+  </table>
+</form>
+<script type="text/javascript">
+var chk = document.getElementsByName("chk[]");
+var sel = document.getElementById("sel");
+
+//代码示例一：全选或全不选
+sel.onchange = function(ev){
+	for(var i=0;i<chk.length;i++) {
+		chk[i].checked= sel.checked;
+	}
+}
+
+/*
+//代码示例二：点哪个获取哪个的值
+for(var i=0;i<chk.length;i++) {
+	chk[i].onchange= function(){
+		 if(this.checked) alert(this.value);	//
+	} 
+}
+*/
+
+/*
+	document.writeln(chk[i].value);  //获取复选框值的方法
+	chk[i].checked= "checked";	  //设置复选框为被选中状态,"checked"也可以换用true进行设置
+	if(chk[i].checked)			//如果元素被选中这个结果是true否则是false
+	
+	说明：复选框在实际项目中经常用到，主要用途
+	1、全选或全部选
+	2、部分选择
+	3、获取选定的值
+	4、判断是否在选择状态
+*/
+</script>
+</body>
+</html>

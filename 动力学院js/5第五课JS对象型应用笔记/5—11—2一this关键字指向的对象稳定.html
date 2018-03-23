@@ -1,0 +1,111 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：this关键字高级应用
+*/
+/*
+var i = 2014;
+function fnA(obj,fn){	 
+	 obj.fn = fn;		
+	 //注意这行代码，必须重新赋值下，前面一个fn和后面一个fn
+	 //前面是修改对象的属性，后面是传递的参数。	 		
+	 obj.fn();	 
+} 
+
+var o = {
+	i:2008,
+	fn:66,
+	fnB:function(){
+			alert(this.i);
+		},
+	fnC:function(){
+		this.fnB();		//输出2008
+		fnA(this,this.fnB);  //输出2014,子函数在传递参数过程中变量作用域发生了变化
+	}		
+};
+o.fnC();
+*/
+/* 
+问题提出：假设fnA是一个系统函数，只能接收一个函数名作为参数怎么办呢？继续改进以上代码如下
+*/
+var i = 2014;
+function fnA(fn){	 
+      fn();
+} 
+
+//声明一个返回函数的函数
+function fnE(obj,fn){
+	return function(){
+		fn.call(obj);
+	}
+}
+ 
+var o = {
+	i:2008,
+	fn:66,
+	fnB:function(){
+			alert(this.i);
+		},
+	fnC:function(){
+		this.fnB();		//输出2008
+		fnA(fnE(this,this.fnB));  //输出2008,调用时候绑定调用的对象
+	}		
+};
+o.fnC();
+
+//创建绑定调用对象的方法二,通过闭包获取当前作用域(推荐的方法)
+/*
+var i = 2014;
+function fnA(fn){	 
+      fn();
+} 
+ 
+var o = {
+	i:2008,
+	fn:66,
+	fnB:function(){
+			alert(this.i);
+		},
+	fnC:function(){
+		that = this;
+		this.fnB();		//输出2008
+		fnA( function(){
+				that.fnB();	
+			}		
+		);  //输出2008,通过闭包得到当前作用域，好访问保存好的对象that 
+	}		
+};
+o.fnC();
+*/
+/*
+还可以改进以上代码如下：
+var i = 2014;
+function fnA(fn){	 
+      fn();
+} 
+
+function fnT(){that.fnB();};		//通过中转函数
+
+var o = {
+	i:2008,
+	fn:66,
+	fnB:function(){
+			alert(this.i);
+		},
+	fnC:function(){
+		that = this;
+		this.fnB();		//输出2008
+		fnA(fnT);  //输出2008,通过全局变量that得到当前作用域.
+	}		
+};
+o.fnC();
+*/
+</script>
+</pre>

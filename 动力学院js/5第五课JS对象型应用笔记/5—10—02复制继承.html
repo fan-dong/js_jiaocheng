@@ -1,0 +1,64 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：复制继承
+继承的本质就是让子类拥有父类的内容，所以可以直接把父类的属性和方法复制给子对象
+*/ 
+var oP = {
+	type:"中国",
+	like:{
+		myl:["打球","游泳"]
+	}
+	
+} ;	 
+
+var p1 = {
+	name:"张三"
+};
+
+deepCopy(oP,p1);
+document.writeln(p1.like.myl);
+
+　　function deepCopy(p, c) { 
+
+　　　　var c = c || {};
+
+　　　　for (var i in p) { 
+
+　　　　　　if (typeof p[i] === 'object') { 
+
+　　　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+
+　　　　　　　　deepCopy(p[i], c[i]);
+
+　　　　　　} else {
+		
+　　　　　　　　　c[i] = p[i];
+
+　　　　　　}
+　　　　}
+
+　　 　return c;
+　　}
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

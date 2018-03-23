@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>页面加载事件-动力学院</title>
+</head>
+
+<body>
+ 
+ 
+<!--
+知识点一：DOMContentLoaded事件， 支持浏览器：IE9+和所有主流支持HTML5的浏览器
+	说明：
+	在DOM文档加载完毕之后触发，而不理会图像、CSS、JS等其他资源是否加载完毕。   
+    这个事件总是在onload之前触发。
+	DOMContentLoaded事件发生的源对象是document,也会冒泡到window对象上。
+    
+知识点二：readystatechange事件 IE及火狐支持
+	说明：
+	readystatechange事件对象有一个属性readyState,此属性可能包含下列5个值中的一个。
+	1、uninitialized(未初始化)
+    2、loading(正在加载)
+    3、loaded(加载完毕)
+    4、interactive(可以交互，大致相当于DOMContentLoaded事件触发时刻)
+    5、complete(完成)
+  不是所有对象都会经历以上5个步骤，一般都会少于4个步骤，这并不严重影响我们对document加载状态的使用。
+	   
+
+知识点三：contextmenu事件
+	上下文菜单，可以通过此事件来自定义在浏览器上面右键菜单的效果。
+    取消默认菜单：event.preventDefault()，IE下用event.returnValue=false
+
+-->
+ 
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>表单事件之复选框应用案例-动力学院</title>
+</head>
+
+<body>
+<form action="?" id="form1">
+  <select name="age[]" id="age" multiple>
+    <!--如果标记了 mutiple可以多选name就必须以数组形式表现，后台才能获取多选结果--> 
+    <!--后台调用格式 $_POST["age"] 调用时候不需要中括号-->
+    <option value="0">请选择您的年龄</option>
+    <option value="16">16岁</option>
+    <option value="26">26岁</option>
+    <option value="56">56岁</option>
+    
+  </select>
+  <input type="submit" value="提交">
+</form>
+<script type="text/javascript">
+var age = document.getElementById("age");
+age.onchange = function(){
+	//alert(this.value);  //获取当前值
+	//alert(this.options[this.selectedIndex].value);  //获取当前值等同上面方法
+	//alert(this.options[this.selectedIndex].text);   //获取文本只能这样写
+
+}
+
+/*获取所有值
+for(var i=0;i<age.length;i++){
+	document.writeln(age[i].value);	//获取所有值
+}
+*/
+
+/*
+//获取multiple多值的方法
+form1.onsubmit = function(){
+	for(var i=0;i<age.length;i++){
+		if(age.options[i].selected){
+			alert(age.options[i].value);
+		}
+	}
+} 
+*/
+
+/*
+//动态添加option选项
+var op = document.createElement("option");
+var optxt = document.createTextNode("46岁");
+op.appendChild(optxt);
+op.setAttribute("value",46);
+age.add(op,age.options[3]);
+*/
+
+/*
+//动态删除option选项
+age.remove(2);
+
+*/
+age.remove(2);
+</script> 
+
+<!--
+知识点一：options
+	select中所有<option>元素的集合
+
+知识点二：selectedIndex 
+	从0开始数起的索引顺序，如果没有选中其值为-1。对于标记multiple的多选也只能获取第一个选项的索引
+
+知识点三：add(newOption,relOption) 在参考节点前插入新option节点
+
+知识点四：remove(index) 移除给定位置的选项。
+
+-->
+</body>
+</html>

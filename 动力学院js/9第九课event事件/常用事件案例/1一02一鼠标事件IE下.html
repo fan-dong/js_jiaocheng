@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件类型-动力学院</title>
+<style type="text/css">
+h1, h2, h3, h4, h5, h6, p {
+	margin:20px;
+	padding:0px;
+	width:150px;
+	height:150px;
+	background-color:#0C6;
+	float:left;
+	color:#fff;
+	font-size:24px;
+	font-family:"microsoft yahei";
+}
+* {
+	word-break:break-all;
+}
+div {
+	width:800px;
+	border:5px #09C solid;
+	overflow:hidden;
+}
+</style>
+</head>
+
+<body>
+<div>
+  <h1>鼠标从我上面移出：onmouseout</h1>
+  <h2>滚轮事件与IE和W3C的区别</h2>
+</div>
+<script language="javascript">
+//getE是自定义的。
+var h1 = getE("h1");
+
+h1.onmouseout = function(){
+	if(event.toElement){
+		 alert(this);   //判断一下可以避免，函数重复调用
+	}  
+}
+
+
+ 
+ 
+
+function getE(str){
+  var o = document.getElementsByTagName(str)[0];	
+  return o;
+}
+/*
+说明：IE下onmouseout会触发多次。
+一般加以判断进行清理多余动作。
+老版本MSIE不支持relatedTarget属性，可以用代替的属性，分别是 fromElement和toElement
+*/
+</script>
+</body>
+</html>

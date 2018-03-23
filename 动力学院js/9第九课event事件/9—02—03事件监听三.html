@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件监听三-动力学院</title>
+<style type="text/css">
+#box {
+	width:500px;
+	height:300px;
+	background-color:#CCC;
+	position:relative;
+}
+#box1 {
+	width:300px;
+	height:150px;
+	background-color:#0C3;
+	position:absolute;
+}
+#box2 {
+	width:200px;
+	height:200px;
+	background-color:#09C;
+	position:absolute;
+}
+#box3 {
+	width:100px;
+	height:50px;
+	background-color:#FF0;
+	position:absolute;
+}
+</style>
+</head>
+
+<body>
+<div id="box">
+  <div id="box1"></div>
+  <div id="box2"></div>
+</div>
+<pre>
+<script language="javascript">
+var box = document.getElementById("box");
+box.addEventListener("click",fnA,false);
+box.addEventListener("click",fnB,false);
+
+function fnA(){
+	alert("年轻没有不敢做的梦！");
+}
+function fnB(){
+	alert("只有不敢红的人！");
+}
+/*
+知识点一：element.addEventListener(事件类型,函数名,冒泡还是捕获型);
+	在DOM2中使用addEventListener方法把事件绑定到具体对象上。  
+	addEventListener方法有三个参数，第一个是事件类型，不需要on前缀的。
+	第二个参数是发生这个事件的时候要调用的函数，第三个是布尔值的true或false.
+	false代码是以冒泡型事件流进行处理，一般都选用false.
+	true代码以捕获型事件流进行处理，不是必须不推荐使用。
+
+知识点二：使用element.removeEventListener(type,listener,useCapture);方法可以移除已经添加的实际。
+	使用方法：box.removeEventListener("click",fnB,false);	
+
+知识点三：addEventListener是DOM2的标准语法，新版本主流浏览器基本都支持。但是老版本IE浏览器不支持。
+老版本IE浏览器有自己的方法 attachEvent和detachEvent.
+	语法格式如下：
+		element.attachEvent("onclick",listenerFunction) //添加事件
+		element.detachEvent("onclick",listenerFunction) //删除事件
+*/
+
+//兼容新老版本主流浏览器的事件处理程序
+var myEevent ={
+	
+	Add:function(element,type,handler){
+		
+		if(element.addEventListener){ 
+			element.addEventListener(type,handler,false);
+		}
+		else if(element.attachEvent){ 
+				element.attatchEvent("on"+type,handler);
+			}
+		else{	alert("你使用的浏览器非主流，推荐使用IE,谷歌，火狐");}
+	},
+	
+	Del:function(element,type,handler){
+		if(element.removeEventListener){ 
+			element.removeEventListener(type,handler,false);
+		}
+		else if(element.detachEvent){ 
+				element.detachEvent("on"+type,handler);
+			}
+		else{	alert("你使用的浏览器非主流，推荐使用IE,谷歌，火狐");}
+	}
+} ;
+
+//测试结果：
+myEevent.Del(box,"click",fnA);
+myEevent.Add(box,"click",fnC);
+function fnC(){
+	alert("动力学院让你红红红起来！我们一起努力改变自己，改变未来！");
+}
+
+/*
+学了这么多都是为了后面的灵活使用做铺垫
+下一节：事件对象
+*/
+</script>
+</pre>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：JS对象用法         *
+ ****************************
+ */
+/*
+知识点一：理解继承的概念
+	父对象有很多实用的属性或方法，子对象只要继承下就自动拥有和父类一样的属性和方法，
+	而不需要重新写这些属性和方法。
+	举例：假设父辈是亿万富翁，有多个孩子这些孩子只要继承其父的部分或全部财产就能很富有，
+	比重新创业要轻松很多。	
+	JS中只有实现继承没有接口继承，这种实现继承是依靠原型链来实现的。
+
+代码示例理解继承：
+*/
+function  A(){
+	this.name = "A类";
+}
+A.prototype.say = function(){
+	echo("A类的原型方法");
+}
+
+function B(){
+	this.age = 18;
+}
+B.prototype = new A();
+var b = new B;
+echo(b.age);		//输出：18
+echo(b.name);		//输出：A类。这个是继承过来的
+b.say();			//输出：A类的原型方法。这个是继承过来的
+/*
+说明：
+以上代码定义了A类型和B类型，B类型继承了A类型的属性和方法，这种继承是通过把A类型的实例的属性和方法
+赋值给B类型的原型对象来完成的。
+*/
+ 
+
+/*
+知识点二：检测原型与实例的关系可以使用 instanceof运算符或isPrototypeOf运算符，用法如下
+*/
+//使用 instanceOf操作符
+echo(b instanceof Object) ; 	//输出：true
+echo(b instanceof A) ;	 		//输出：true
+echo(b instanceof B) ; 		//输出：true
+//使用 isPrototypeOf操作符
+echo(Object.prototype.isPrototypeOf(b)) ; 	//输出：true
+echo(A.prototype.isPrototypeOf(b)) ;	 		//输出：true
+echo(B.prototype.isPrototypeOf(b)) ; 		//输出：true
+
+
+/*
+知识点三：原型链实现继承的问题，和之前讲的原型对象一样，对于引用类型的属性会产生问题。
+下一节讨论原形链继承存在的问题
+*/
+
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

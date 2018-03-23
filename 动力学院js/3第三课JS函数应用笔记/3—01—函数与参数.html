@@ -1,0 +1,85 @@
+<pre>
+<script language="javascript">
+/****************************
+ * 作者：赵呈洋       		*
+ * 版权：动力学院     		*
+ * 用途：教学讲义与笔记     *
+ * 内容：函数应用           *
+ ****************************
+ */
+/*
+知识点一：函数的定义与调用
+函数是用来完成某个功能的一组代码的集合，它接受0个或多个参数，可以有也可以没有返回值。定义格式如下
+	function functionName([arguments1,arguments2......argumentsN]){
+		//语句块;	
+		[return expression ;]
+	}
+		
+知识点二：函数调用方法：写上函数名和参数即可
+	functionName([arguments1,arguments2......argumentsN]);
+注意事项：
+	1、JS函数的参数不允许有默认值这点与PHP不同
+	2、代码执行顺序是一行行向下执行，执行之前会进行分析，函数会被提权。
+	   也就是无论函数定义在调用之前还是之后都可以正常调用。
+	3、函数中除了可以包含之前学过的所有合法语句内容外也可以包含其他函数，函数自己也可以调用自己。
+	   自己调用自己的情况叫函数的递归调用，必须满足退出调用的条件，否则变成死循环的调用。
+	4、函数禁止同名 	
+	
+代码示例快速入门：
+*/
+//求两个数之和的函数
+function fnAdd(a,b){
+	echo(a+b);
+}
+//调用方法
+c = fnAdd(2,3);	//输出 5 
+echo(typeof c);	//输出：undefined 因为这个函数没有返回值。
+
+echo('----对比上例理解输出与返回值的区别----');
+function fnAdd2(a,b){
+	return (a+b);
+}
+//调用方法
+c = fnAdd2(2,3);	//不会有任何输出，返回是默默的在内存中把运算结果返回给变量保存 
+echo(c);	//输出：5
+
+
+
+echo('----内置的函数的参数对象 arguments----');
+function fnArguments(){
+	for(p in arguments){
+		echo(arguments[p]);
+	}
+	echo(arguments.length);  //获取参数的总个数
+}
+fnArguments(1,2,3,4,5);
+/*
+JS函数参数虽然不能有默认值，但是提供了一个特别的数组 arguments用来接受所有的参数，并按
+顺序保存在arguments对应的属性中。
+注意：与PHP不同JS不会验证实际参数与形式参数个数是否相等，任何自定义的函数都可以接受任意数量的参数
+（Netscape说明最多能接受25个）。任何遗漏的参数都会被赋以undefined值，多余的会被自动忽略(可以通过arguments查看)。
+代码示例：
+*/
+echo('-----函数的参数------')
+function fnArguments2(a,b,c){
+ 	echo(a);
+	echo(b);
+	echo(c); 	//输出：undefined  参数没给出默认赋值：undefined
+	echo(arguments.length);	//输出2，arguments中自动获取的是实际参数个数，和形式参数无关。
+}
+fnArguments2(1,2);
+
+
+
+//封装写函数
+function echo(  str, flag ){
+ 	if(arguments[1]==1){
+		document.write(arguments[0]);
+	}
+	else{
+		document.writeln(arguments[0]);
+	}
+	
+} 
+</script>
+</pre>

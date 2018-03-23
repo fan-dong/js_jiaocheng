@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>事件类型-动力学院</title>
+<style type="text/css">
+h1, h2, h3, h4, h5, h6, p {
+	margin:20px;
+	padding:0px;
+	width:150px;
+	height:150px;
+	background-color:#0C6;
+	float:left;
+	color:#fff;
+	font-size:24px;
+	margin:10px;
+	font-family:"microsoft yahei";
+ 
+}
+* {
+	word-break:break-all;
+}
+div {
+	width:800px;
+	border:5px #09C solid;
+	overflow:hidden;
+}
+</style>
+</head>
+
+<body>
+一、鼠标类型事件 
+	1.	click		单击鼠标时触发
+	2.	dblclik 	双击鼠标时触发
+    3.	mousedown 	单击任意一个鼠标按键时触发
+    4.	mouseup		鼠标按键被松开
+    5.	mouseout 	鼠标从某元素
+    6.	mousemove	鼠标在元素之上移动时
+    7.	mouseover	鼠标移到某元素之上
+说明：鼠标事件对几乎所有元素均可用。
+<div>
+  <h1>单击我试试看：onclick</h1>
+  <h2>双击我试试看：ondblclick</h2>
+  <h3>鼠标按下试试看：onmousedown</h3>
+  <h4>鼠标按下松开试试看：onmouseup</h4>
+  <h5>鼠标从我上面移出：onmouseout</h5>
+  <h6>鼠标在我上面移动：onmousemove</h6>
+  <p>鼠标移动到我上面：onmouseover </p>
+</div>
+<script language="javascript">
+//getE是自定义的。
+var h1 = getE("h1");
+var h2 = getE("h2");
+var h3 = getE("h3");
+var h4 = getE("h4");
+var h5 = getE("h5");
+var h6 = getE("h6");
+var p = getE("p");
+
+h1.onclick = function(){ alert("我被单击时候才会弹出");}
+h2.ondblclick = function(){alert("感谢您的双击光临");}
+h3.onmousedown = function(){ alert("鼠标按下叫mousedown");}
+h4.onmouseup = function(){ alert("鼠标按下后松开叫mouseup");}
+h5.onmouseout = function(evt){
+	 ev = document.event||evt;
+	 if(ev.relatedTarget!=null)
+	  alert("通知：鼠标移出我了onmouseout"+ev.relatedTarget); 
+ }
+h6.onmousemove = function(){ alert("通知：鼠标onmousemove了"); }
+p.onmouseover = function(){ alert("通知：鼠标mouseover了"); }
+
+function getE(str){
+  var o = document.getElementsByTagName(str)[0];	
+  return o;
+}
+/*
+说明：IE下onmouseout会触发多次。
+一般加以判断进行清理多余动作。
+老版本MSIE不支持relatedTarget属性，可以用代替的属性，分别是 fromElement和toElement
+*/
+//滚轮事件
+/*
+window.onmousewheel = function(ev){
+	var ev = ev||event;
+	alert(ev.wheelDelta);
+}
+*/
+
+window.ondommousescroll = function(ev){
+	var ev = ev||event;
+	alert("OK");
+}
+</script>
+</body>
+</html>
